@@ -1,8 +1,25 @@
+import React from 'react';
 import { useEffect } from 'react';
 
 import { useAppContext } from '../../context/appContext';
 import styled from 'styled-components';
 import { InputSimple, Alert, InputSelect } from '../../components';
+
+// MUI
+import Box from '@mui/material/Box';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Chip from '@mui/material/Chip';
+//
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
+import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
 
 // los valores los pongo en el global ( y no en la pura pag como en el register ) xq para editar y agregar receta voy a ocupar la misma pag ( y la diferencia en la pag la hago con el "isEditing" )
 const AddRecipe = () => {
@@ -39,6 +56,34 @@ const AddRecipe = () => {
       problem3,
    } = useAppContext();
    // PRIMERO CAMBIO TODO EN EL STATE ( LOS DATOS DE LA RECETA ), Y LUEGO LO MANDO
+
+   //mui
+   const [personName, setPersonName] = React.useState([]);
+   const handleChangeOils = event => {
+      const {
+         target: { value },
+      } = event;
+      setPersonName(
+         // On autofill we get a stringified value.
+         typeof value === 'string' ? value.split(',') : value
+      );
+   };
+   const ITEM_HEIGHT = 48;
+   const ITEM_PADDING_TOP = 8;
+   const MenuProps = {
+      PaperProps: {
+         style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
+         },
+      },
+   };
+   //problems
+   const [valueProblem, setValueProblem] = React.useState('');
+
+   const handleChangeProblem = event => {
+      setValueProblem(event.target.value);
+   };
 
    const handleRecipeInput = e => {
       const name = e.target.name;
@@ -83,142 +128,197 @@ const AddRecipe = () => {
       <Wrapper>
          <form className="form">
             <h3>{isEditing ? 'editar recetita' : 'añadir recetita'} </h3>
+
             {showAlert && <Alert />}
 
-            <div className="form-center">
-               {/* title */}
-               <InputSimple
-                  inputClass={'title'}
-                  type="text"
-                  labelText="Titulo"
-                  name="title"
-                  value={title}
-                  changeStateValues={handleRecipeInput}
-               />
+            <TextField
+               id="outlined-multiline-flexible"
+               label="Titulo"
+               multiline
+               fullWidth
+               maxRows={2}
+               name="title"
+               value={title}
+               onChange={handleRecipeInput}
+               sx={{
+                  mb: 2,
+                  '.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                     borderColor: 'var(--primary-500);',
+                     borderWidth: '2px',
+                  },
+               }}
+            />
 
-               {/* description */}
-               {/* <InputSimple
-                  type="text-area"
-                  labelText="Descripción"
-                  name="desc"
-                  value={desc}
-                  changeStateValues={handleRecipeInput}
-               /> */}
+            <TextField
+               id="outlined-multiline-description"
+               label="Descripcion"
+               multiline
+               fullWidth
+               rows={4}
+               maxRows={4}
+               name="desc"
+               value={desc}
+               onChange={handleRecipeInput}
+               sx={{
+                  mb: 2,
+                  // '.MuiOutlinedInput-notchedOutline': {
+                  //    borderColor: '#d711d7',
+                  //    borderWidth: '8px',
+                  // },
+                  // '.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  //    borderColor: '#77d711',
+                  //    borderWidth: '8px',
+                  // },
+                  // '&:hover .MuiOutlinedInput-notchedOutline': {
+                  //    borderColor: '#1ee8f2',
+                  //    borderWidth: '8px',
+                  // },
+               }}
+            />
 
-               <div className="form-row description">
-                  <label htmlFor="description" className="form-label">
-                     descripción
-                  </label>
-
-                  <textarea
-                     className="form-textarea"
-                     type="text"
-                     rows="5"
-                     name="desc"
-                     value={desc}
-                     onChange={handleRecipeInput}
-                  />
-               </div>
-
-               {/* ACEITES */}
-
-               <InputSelect
-                  labelText="aceitito 1"
-                  inputClass={'classOil1'}
-                  key="oil1"
-                  name="oil1"
-                  value={oil1}
-                  changeStateValues={handleRecipeInput}
-                  list={['', ...oilsOptions]}
-               ></InputSelect>
-               <InputSelect
-                  labelText="aceitito 2"
-                  inputClass={'classOil2'}
-                  key="oil2"
-                  name="oil2"
-                  value={oil2}
-                  changeStateValues={handleRecipeInput}
-                  list={['', ...oilsOptions]}
-               ></InputSelect>
-               <InputSelect
-                  labelText="aceitito 3"
-                  inputClass={'classOil3'}
-                  key="oil3"
-                  name="oil3"
-                  value={oil3}
-                  changeStateValues={handleRecipeInput}
-                  list={['', ...oilsOptions]}
-               ></InputSelect>
-               <InputSelect
-                  labelText="aceitito 4"
-                  inputClass={'classOil4'}
-                  key="oil4"
-                  name="oil4"
-                  value={oil4}
-                  changeStateValues={handleRecipeInput}
-                  list={['', ...oilsOptions]}
-               ></InputSelect>
-               <InputSelect
-                  labelText="aceitito 5"
-                  inputClass={'classOil5'}
-                  key="oil5"
-                  name="oil5"
-                  value={oil5}
-                  changeStateValues={handleRecipeInput}
-                  list={['', ...oilsOptions]}
-               ></InputSelect>
+            {/* ACEITES */}
+            <Stack
+               direction={{ xs: 'column', sm: 'row' }}
+               spacing={2}
+               justifyContent="space-between"
+               // alignItems="center"
+               alignItems={{ xs: 'center', sm: 'flex-start' }}
+            >
+               <FormControl
+                  id="multiline-oils"
+                  sx={{
+                     flex: 1,
+                     width: { xs: '100%', sm: 'auto' },
+                     // '& fieldset > legend': { width: '60px' },
+                  }}
+                  label="aceititos"
+               >
+                  <InputLabel id="oils-input">Aceititos</InputLabel>
+                  <Select
+                     labelId="oils-input"
+                     id="multiple-oils"
+                     multiple
+                     value={personName}
+                     onChange={handleChangeOils}
+                     input={
+                        <OutlinedInput
+                           color="secondary"
+                           id="select-multiple-oils"
+                           label="Chip"
+                        />
+                     }
+                     renderValue={selected => (
+                        <Box
+                           sx={{
+                              display: 'flex',
+                              flexWrap: 'wrap',
+                              gap: 0.5,
+                           }}
+                        >
+                           {selected.map(value => (
+                              <Chip key={value} label={value} />
+                           ))}
+                        </Box>
+                     )}
+                     MenuProps={MenuProps}
+                  >
+                     {oilsOptions.map(name => (
+                        <MenuItem
+                           key={name}
+                           value={name}
+                           // style={getStyles(name, personName, theme)}
+                        >
+                           {name}
+                        </MenuItem>
+                     ))}
+                  </Select>
+               </FormControl>
 
                {/* PROBLEMS */}
 
-               <InputSimple
-                  labelText="molestia 1"
-                  inputClass={'classProblem1'}
-                  key="problem1"
-                  type="text"
-                  name="problem1"
-                  value={problem1}
-                  changeStateValues={handleRecipeInput}
-               ></InputSimple>
-               <InputSimple
-                  labelText="molestia 2"
-                  inputClass={'classProblem2'}
-                  key="problem2"
-                  type="text"
-                  name="problem2"
-                  value={problem2}
-                  changeStateValues={handleRecipeInput}
-               ></InputSimple>
-               <InputSimple
-                  labelText="molestia 3"
-                  inputClass={'classProblem3'}
-                  key="problem3"
-                  type="text"
-                  name="problem3"
-                  value={problem3}
-                  changeStateValues={handleRecipeInput}
-               ></InputSimple>
+               <TextField
+                  id="multiline-problems"
+                  label="Molestias"
+                  placeholder="Separa las molestias con una coma (,)"
+                  multiline
+                  maxRows={4}
+                  value={valueProblem}
+                  onChange={handleChangeProblem}
+                  sx={{ flex: 1, width: { xs: '100%', sm: 'auto' } }}
+               />
+            </Stack>
 
-               {/* <div className="btn-container"></div> */}
-               <button
-                  className="btn btn-block submit-btn"
-                  type="submit"
-                  onClick={handleSubmit}
-                  disabled={isLoading}
+            {/* <Stack
+                  direction="column"
+                  justifyContent="flex-start"
+                  alignItems="flex-end"
+                  spacing={2}
+                  sx={{ mt: 1 }}
+               >
+                  <Box sx={{ width: { xs: '100%', sm: '25%' } }}>
+                     <button
+                        className="btn btn-block submit-btn"
+                        type="submit"
+                        onClick={handleSubmit}
+                        disabled={isLoading}
+                     >
+                        enviar
+                     </button>
+                  </Box>*/}
+
+            {/* este tiene q ir despues del submit button  */}
+            {/* <Box sx={{ width: { xs: '100%', sm: '25%' } }}>
+                     <button
+                        className="btn btn-block clear-btn"
+                        onClick={e => {
+                           e.preventDefault();
+                           clearValues();
+                        }}
+                     >
+                        limpiar
+                     </button>
+                  </Box>
+               </Stack>   */}
+
+            <Stack
+               direction="column"
+               justifyContent="flex-start"
+               alignItems="flex-end"
+               spacing={2}
+               sx={{ mt: 2 }}
+            >
+               <Button
+                  variant="contained"
+                  startIcon={<SendIcon />}
+                  sx={{
+                     width: { xs: '100%', sm: '25%' },
+                     bgcolor: 'var(--primary-500)',
+                     '&:hover': {
+                        backgroundColor: 'var(--primary-100)',
+                        color: 'var(--primary-700)',
+                     },
+                  }}
+                  onClick={() => {
+                     console.log('xxxxxxxxxx');
+                  }}
                >
                   enviar
-               </button>
-
-               {/* este tiene q ir despues del submit button  */}
-               <button
-                  className="btn btn-block clear-btn"
-                  onClick={e => {
-                     e.preventDefault();
-                     clearValues();
+               </Button>
+               <Button
+                  variant="contained"
+                  startIcon={<CleaningServicesIcon />}
+                  sx={{
+                     width: { xs: '100%', sm: '25%' },
+                     bgcolor: 'var(--primary-700)',
+                     '&:hover': {
+                        backgroundColor: 'var(--primary-100)',
+                        color: 'var(--primary-700)',
+                     },
                   }}
                >
                   limpiar
-               </button>
-            </div>
+               </Button>
+            </Stack>
          </form>
       </Wrapper>
    );
@@ -233,43 +333,6 @@ const Wrapper = styled.section`
    padding: 3rem 2rem 4rem;
    box-shadow: var(--shadow-2);
 
-   .title {
-      grid-area: title;
-   }
-   .description {
-      grid-area: description;
-   }
-   .classOil1 {
-      grid-area: oil1;
-   }
-   .classOil2 {
-      grid-area: oil2;
-   }
-   .classOil3 {
-      grid-area: oil3;
-   }
-   .classOil4 {
-      grid-area: oil4;
-   }
-   .classOil5 {
-      grid-area: oil5;
-   }
-   .classProblem1 {
-      grid-area: problem1;
-   }
-   .classProblem2 {
-      grid-area: problem2;
-   }
-   .classProblem3 {
-      grid-area: problem3;
-   }
-   .submit-btn {
-      grid-area: submitBtn;
-   }
-   .clear-btn {
-      grid-area: clearBtn;
-   }
-
    h3 {
       margin-top: 0;
    }
@@ -280,105 +343,5 @@ const Wrapper = styled.section`
       padding: 0;
       max-width: 100%;
       width: 100%;
-   }
-   .form-row {
-      margin-bottom: 0;
-   }
-   .form-center {
-      display: grid;
-      row-gap: 0.5rem;
-      grid-template-areas:
-         'title'
-         'description'
-         'oil1'
-         'oil2'
-         'oil3'
-         'oil4'
-         'oil5'
-         'problem1'
-         'problem2'
-         ' problem3'
-         'submitBtn'
-         'clearBtn';
-   }
-   .form-center button {
-      align-self: end;
-      height: 35px;
-      margin-top: 1rem;
-   }
-   /* .btn-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      column-gap: 1rem;
-      align-self: flex-end;
-      margin-top: 0.5rem;
-      button {
-         height: 35px;
-      }
-   } */
-   .clear-btn {
-      background: var(--grey-500);
-   }
-   .clear-btn:hover {
-      background: var(--grey-700);
-   }
-   @media (min-width: 992px) {
-      .form-center {
-         grid-template-columns: 1fr 1fr;
-         align-items: center;
-         column-gap: 1rem;
-
-         grid-template-areas:
-            'title title'
-            'description description'
-            'oil1 problem1'
-            'oil2 problem2'
-            'oil3 problem3'
-            'oil4 submitBtn'
-            'oil5 clearBtn';
-      }
-
-      .btn-container {
-         margin-top: 0;
-      }
-   }
-   @media (min-width: 1120px) {
-      .form {
-         margin: 0 auto;
-         /* border-radius: 0;
-      box-shadow: none;
-      padding: 0; */
-         /* max-width: 80%; */
-         max-width: 740px;
-         width: 100%;
-      }
-
-      .form-center {
-         grid-template-columns: 1fr 1fr /* 1fr */;
-
-         /* grid-template-areas:
-            'title title .'
-            'description description .'
-            'oil1 problem1 .'
-            'oil2 problem2 .'
-            'oil3 problem3 .'
-            'oil4 . submitBtn'
-            'oil5 . clearBtn';*/
-      }
-      .form-center button {
-         margin-top: 0;
-      }
-
-      .btn-container {
-         display: grid;
-         grid-template-columns: 1fr;
-         row-gap: 1rem;
-         align-self: flex-end;
-         /* margin-top: 0.5rem; */
-         /* padding-top: 2rem; */
-         button {
-            height: 35px;
-         }
-      }
    }
 `;
