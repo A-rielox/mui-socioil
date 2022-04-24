@@ -20,6 +20,7 @@ import Stack from '@mui/material/Stack';
 // ================
 import InputSimpleMui from '../../components/mui/InputSimpleMui';
 import { ButtonEnviar, ButtonLimpiar } from '../../components/mui/Button';
+import SelectMultiple from '../../components/mui/SelectMultiple';
 
 // los valores los pongo en el global ( y no en la pura pag como en el register ) xq para editar y agregar receta voy a ocupar la misma pag ( y la diferencia en la pag la hago con el "isEditing" )
 const AddRecipe = () => {
@@ -152,7 +153,6 @@ const AddRecipe = () => {
                onChange={handleRecipeInput}
             />
 
-            {/* ACEITES */}
             <Stack
                direction={{ xs: 'column', sm: 'row' }}
                spacing={2}
@@ -160,58 +160,10 @@ const AddRecipe = () => {
                // alignItems="center"
                alignItems={{ xs: 'center', sm: 'flex-start' }}
             >
-               <FormControl
-                  id="multiline-oils"
-                  sx={{
-                     flex: 1,
-                     width: { xs: '100%', sm: 'auto' },
-                     // '& fieldset > legend': { width: '60px' },
-                  }}
-                  label="aceititos"
-               >
-                  <InputLabel id="oils-input">Aceititos</InputLabel>
-                  <Select
-                     labelId="oils-input"
-                     id="multiple-oils"
-                     multiple
-                     value={personName}
-                     onChange={handleChangeOils}
-                     input={
-                        <OutlinedInput
-                           color="secondary"
-                           id="select-multiple-oils"
-                           label="Chip"
-                        />
-                     }
-                     renderValue={selected => (
-                        <Box
-                           sx={{
-                              display: 'flex',
-                              flexWrap: 'wrap',
-                              gap: 0.5,
-                           }}
-                        >
-                           {selected.map(value => (
-                              <Chip key={value} label={value} />
-                           ))}
-                        </Box>
-                     )}
-                     MenuProps={MenuProps}
-                  >
-                     {oilsOptions.map(name => (
-                        <MenuItem
-                           key={name}
-                           value={name}
-                           // style={getStyles(name, personName, theme)}
-                        >
-                           {name}
-                        </MenuItem>
-                     ))}
-                  </Select>
-               </FormControl>
+               {/* ACEITES */}
+               <SelectMultiple />
 
                {/* PROBLEMS */}
-
                <InputSimpleMui
                   label="Molestias"
                   placeholder="Separa las molestias con una coma (,)"
