@@ -17,9 +17,9 @@ import Chip from '@mui/material/Chip';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 
-import Button from '@mui/material/Button';
-import SendIcon from '@mui/icons-material/Send';
-import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
+// ================
+import InputSimpleMui from '../../components/mui/InputSimpleMui';
+import { ButtonEnviar, ButtonLimpiar } from '../../components/mui/Button';
 
 // los valores los pongo en el global ( y no en la pura pag como en el register ) xq para editar y agregar receta voy a ocupar la misma pag ( y la diferencia en la pag la hago con el "isEditing" )
 const AddRecipe = () => {
@@ -131,8 +131,7 @@ const AddRecipe = () => {
 
             {showAlert && <Alert />}
 
-            <TextField
-               id="outlined-multiline-flexible"
+            <InputSimpleMui
                label="Titulo"
                multiline
                fullWidth
@@ -140,40 +139,17 @@ const AddRecipe = () => {
                name="title"
                value={title}
                onChange={handleRecipeInput}
-               sx={{
-                  mb: 2,
-                  '.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                     borderColor: 'var(--primary-500);',
-                     borderWidth: '2px',
-                  },
-               }}
             />
 
-            <TextField
-               id="outlined-multiline-description"
-               label="Descripcion"
+            <InputSimpleMui
+               label="Descripción"
                multiline
                fullWidth
-               rows={4}
                maxRows={4}
+               rows={4}
                name="desc"
                value={desc}
                onChange={handleRecipeInput}
-               sx={{
-                  mb: 2,
-                  // '.MuiOutlinedInput-notchedOutline': {
-                  //    borderColor: '#d711d7',
-                  //    borderWidth: '8px',
-                  // },
-                  // '.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  //    borderColor: '#77d711',
-                  //    borderWidth: '8px',
-                  // },
-                  // '&:hover .MuiOutlinedInput-notchedOutline': {
-                  //    borderColor: '#1ee8f2',
-                  //    borderWidth: '8px',
-                  // },
-               }}
             />
 
             {/* ACEITES */}
@@ -236,49 +212,17 @@ const AddRecipe = () => {
 
                {/* PROBLEMS */}
 
-               <TextField
-                  id="multiline-problems"
+               <InputSimpleMui
                   label="Molestias"
                   placeholder="Separa las molestias con una coma (,)"
                   multiline
                   maxRows={4}
+                  // name={'xxxx'}
                   value={valueProblem}
                   onChange={handleChangeProblem}
                   sx={{ flex: 1, width: { xs: '100%', sm: 'auto' } }}
                />
             </Stack>
-
-            {/* <Stack
-                  direction="column"
-                  justifyContent="flex-start"
-                  alignItems="flex-end"
-                  spacing={2}
-                  sx={{ mt: 1 }}
-               >
-                  <Box sx={{ width: { xs: '100%', sm: '25%' } }}>
-                     <button
-                        className="btn btn-block submit-btn"
-                        type="submit"
-                        onClick={handleSubmit}
-                        disabled={isLoading}
-                     >
-                        enviar
-                     </button>
-                  </Box>*/}
-
-            {/* este tiene q ir despues del submit button  */}
-            {/* <Box sx={{ width: { xs: '100%', sm: '25%' } }}>
-                     <button
-                        className="btn btn-block clear-btn"
-                        onClick={e => {
-                           e.preventDefault();
-                           clearValues();
-                        }}
-                     >
-                        limpiar
-                     </button>
-                  </Box>
-               </Stack>   */}
 
             <Stack
                direction="column"
@@ -287,37 +231,9 @@ const AddRecipe = () => {
                spacing={2}
                sx={{ mt: 2 }}
             >
-               <Button
-                  variant="contained"
-                  startIcon={<SendIcon />}
-                  sx={{
-                     width: { xs: '100%', sm: '25%' },
-                     bgcolor: 'var(--primary-500)',
-                     '&:hover': {
-                        backgroundColor: 'var(--primary-100)',
-                        color: 'var(--primary-700)',
-                     },
-                  }}
-                  onClick={() => {
-                     console.log('xxxxxxxxxx');
-                  }}
-               >
-                  enviar
-               </Button>
-               <Button
-                  variant="contained"
-                  startIcon={<CleaningServicesIcon />}
-                  sx={{
-                     width: { xs: '100%', sm: '25%' },
-                     bgcolor: 'var(--primary-700)',
-                     '&:hover': {
-                        backgroundColor: 'var(--primary-100)',
-                        color: 'var(--primary-700)',
-                     },
-                  }}
-               >
-                  limpiar
-               </Button>
+               <ButtonEnviar />
+
+               <ButtonLimpiar />
             </Stack>
          </form>
       </Wrapper>
