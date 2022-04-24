@@ -22,38 +22,6 @@ const RecipeSchema = new mongoose.Schema(
          default: 'digize pal Adri',
          required: [true, 'Favor proveer al menos un aceite'],
       },
-      oil1: {
-         type: String,
-         trim: true,
-      },
-      oil2: {
-         type: String,
-         trim: true,
-      },
-      oil3: {
-         type: String,
-         trim: true,
-      },
-      oil4: {
-         type: String,
-         trim: true,
-      },
-      oil5: {
-         type: String,
-         trim: true,
-      },
-      problem1: {
-         type: String,
-         trim: true,
-      },
-      problem2: {
-         type: String,
-         trim: true,
-      },
-      problem3: {
-         type: String,
-         trim: true,
-      },
       desc: {
          type: String,
          required: [true, 'Favor proveer una descripción'],

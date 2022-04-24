@@ -69,6 +69,7 @@ export const initialState = {
    // para pasar a la lista
    oilsList: [],
    problemsList: [],
+   molestias: '',
    oil1: '',
    oil2: '',
    oil3: '',
@@ -276,18 +277,17 @@ const AppProvider = ({ children }) => {
       dispatch({ type: CLEAR_VALUES });
    };
 
-   const createRecipe = async ({ oilsList, problemsList }) => {
+   const createRecipe = async () => {
       dispatch({ type: CREATE_RECIPE_BEGIN });
 
       try {
-         // prettier-ignore
-         const {
-            title,desc,oil1,oil2,oil3,oil4,oil5,problem1,problem2,problem3,user:{ name: userNane }, user:{ level: userLevel }
-         } = state;
+         const { title, desc, problemsList, oilsList } = state;
 
-         // prettier-ignore
          await authFetch.post('/recipes', {
-            oilsList, problemsList,title, desc, oil1, oil2, oil3, oil4, oil5, problem1, problem2, problem3, userNane, userLevel
+            oilsList,
+            problemsList,
+            title,
+            desc,
          });
 
          dispatch({ type: CREATE_RECIPE_SUCCESS });

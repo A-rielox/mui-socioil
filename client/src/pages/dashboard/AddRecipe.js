@@ -1,5 +1,4 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useAppContext } from '../../context/appContext';
 import styled from 'styled-components';
@@ -39,16 +38,17 @@ const AddRecipe = () => {
       editRecipe,
       clearValues,
       createRecipe,
-      oil1,
-      oil2,
-      oil3,
-      oil4,
-      oil5,
-      problem1,
-      problem2,
-      problem3,
+      oilsList,
+      problemsList,
+      molestias,
    } = useAppContext();
    // PRIMERO CAMBIO TODO EN EL STATE ( LOS DATOS DE LA RECETA ), Y LUEGO LO MANDO
+
+   useEffect(() => {
+      let tempProblemsList = molestias.split(',');
+      tempProblemsList = tempProblemsList.map(problem => problem.trim());
+      changeStateValues({ name: 'problemsList', value: tempProblemsList });
+   }, [molestias]);
 
    const handleRecipeInput = e => {
       const name = e.target.name;
@@ -62,31 +62,22 @@ const AddRecipe = () => {
    const handleSubmit = e => {
       e.preventDefault();
 
-      // LISTAS -- oils y problems
-      let oilsList = [oil1, oil2, oil3, oil4, oil5];
-      let problemsList = [problem1, problem2, problem3];
-
-      oilsList = oilsList.filter(oil => oil.length > 1);
-
-      problemsList = problemsList.filter(problem => problem.length > 1);
-
-      // como sea lo pruebo en la API y en la DB
       // prettier-ignore
       if (!title || !desc || oilsList.length === 0 || problemsList.length === 0) {
          displayAlert();
          return;
       }
 
-      if (isEditing) {
-         editRecipe({ oilsList, problemsList });
-         return;
-      }
+      // if (isEditing) {
+      // editRecipe({ oilsList, problemsList });
+      // return;
+      // }
 
       // lo manda a crear con los valores q tiene en el state
-      createRecipe({ oilsList, problemsList });
+      createRecipe();
 
       // limpia campos tras crear receta
-      clearValues();
+      // clearValues();
    };
 
    return (
@@ -144,7 +135,10 @@ const AddRecipe = () => {
                alignItems={{ xs: 'center', sm: 'flex-start' }}
             >
                {/* ACEITES */}
-               <SelectMultiple />
+               <SelectMultiple
+                  initValue={oilsList}
+                  changeStateValues={changeStateValues}
+               />
 
                {/* PROBLEMS */}
                <TextField
@@ -152,8 +146,8 @@ const AddRecipe = () => {
                   placeholder="Separa las molestias con una coma (,)"
                   multiline
                   maxRows={4}
-                  name="problem1"
-                  value={problem1}
+                  name="molestias"
+                  value={molestias}
                   onChange={handleRecipeInput}
                   sx={{ flex: 1, width: { xs: '100%', sm: 'auto' } }}
                />
@@ -166,7 +160,7 @@ const AddRecipe = () => {
                alignItems="flex-end"
                sx={{ mt: 2 }}
             >
-               <ButtonEnviar />
+               <ButtonEnviar handleSubmit={handleSubmit} />
 
                <ButtonLimpiar />
             </Stack>

@@ -1,4 +1,5 @@
-import * as React from 'react';
+import { useState, useEffect } from 'react';
+
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -23,24 +24,28 @@ const MenuProps = {
 
 const names = [...oilsList];
 
-function getStyles(name, personName, theme) {
+function getStyles(name, selectOption, theme) {
    return {
       fontWeight:
-         personName.indexOf(name) === -1
+         selectOption.indexOf(name) === -1
             ? theme.typography.fontWeightRegular
             : theme.typography.fontWeightMedium,
    };
 }
 
-export default function MultipleSelectChip() {
+export default function MultipleSelectChip({ changeStateValues, initValue }) {
    const theme = useTheme();
-   const [personName, setPersonName] = React.useState([]);
+   const [selectOption, setSelectOption] = useState([]);
+
+   useEffect(() => {
+      changeStateValues({ name: 'oilsList', value: selectOption });
+   }, [selectOption]);
 
    const handleChange = event => {
       const {
          target: { value },
       } = event;
-      setPersonName(
+      setSelectOption(
          // On autofill we get a stringified value.
          typeof value === 'string' ? value.split(',') : value
       );
@@ -58,7 +63,7 @@ export default function MultipleSelectChip() {
             labelId="multipleOilsLabel"
             id="multipleOils"
             multiple
-            value={personName}
+            value={initValue}
             onChange={handleChange}
             input={<OutlinedInput id="select-multiple-chip" label="Aceitito" />}
             renderValue={selected => (
@@ -74,7 +79,7 @@ export default function MultipleSelectChip() {
                <MenuItem
                   key={name}
                   value={name}
-                  style={getStyles(name, personName, theme)}
+                  style={getStyles(name, selectOption, theme)}
                >
                   {name}
                </MenuItem>
