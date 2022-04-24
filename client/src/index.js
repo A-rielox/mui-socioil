@@ -7,11 +7,16 @@ import { AppProvider } from './context/appContext';
 
 import { BrowserRouter } from 'react-router-dom';
 
+import { ThemeProvider } from '@mui/material/styles';
+import { dashboardTheme } from './muiTheme';
+
 ReactDOM.render(
    <React.StrictMode>
       <BrowserRouter>
          <AppProvider>
-            <App />
+            <ThemeProvider theme={dashboardTheme}>
+               <App />
+            </ThemeProvider>
          </AppProvider>
       </BrowserRouter>
    </React.StrictMode>,

@@ -51,23 +51,6 @@ export default function MultipleSelectChip() {
          sx={{
             flex: 1,
             width: { xs: '100%', sm: 'auto' },
-            // '& fieldset > legend': { width: '60px' },
-            '.MuiOutlinedInput-notchedOutline': {
-               borderColor: 'var(--primary-200)',
-               borderWidth: '2px',
-            },
-            '&:hover .MuiOutlinedInput-notchedOutline': {
-               borderColor: 'var(--primary-50)',
-               borderWidth: '2px',
-            },
-            '& .Mui-focused .MuiOutlinedInput-notchedOutline': {
-               borderColor: 'var(--primary-500)',
-               borderWidth: '2px',
-            },
-            '& .MuiInputLabel-shrink': {
-               color: 'var(--primary-500)',
-               fontWeight: 'bold',
-            },
          }}
       >
          <InputLabel id="multipleOilsLabel">Aceitito</InputLabel>
