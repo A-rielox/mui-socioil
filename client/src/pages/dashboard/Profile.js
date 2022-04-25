@@ -3,6 +3,17 @@ import { useState } from 'react';
 import { useAppContext } from '../../context/appContext';
 import styled from 'styled-components';
 
+// MUI
+
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
+
+import { ButtonEnviar } from '../../components/mui/Button';
+import SelectSingle from '../../components/mui/SelectSingle';
+
 const Profile = () => {
    const { user, showAlert, displayAlert, updateUser, isLoading } =
       useAppContext();
@@ -38,128 +49,96 @@ const Profile = () => {
    };
 
    return (
-      <Wrapper>
-         <form className="form" onSubmit={handleSubmit}>
+      <Paper
+         sx={{
+            borderRadius: 'var(--borderRadius)',
+            width: '100%',
+            padding: '3rem 2rem 4rem',
+            boxShadow: 'var(--shadow-2)',
+         }}
+      >
+         <Container maxWidth="md">
             <h3>perfil </h3>
             {showAlert && <Alert />}
 
-            {/* name */}
-            <div className="form-center">
-               <InputSimple
-                  labelText="nombre"
-                  type="text"
-                  name="name"
-                  value={name}
-                  changeStateValues={e => setName(e.target.value)}
-               />
-               <InputSimple
-                  labelText="apellido"
-                  type="text"
-                  name="lastName"
-                  value={lastName}
-                  changeStateValues={e => setLastName(e.target.value)}
-               />
-               <InputSimple
-                  labelText="correo"
-                  type="email"
-                  name="email"
-                  value={email}
-                  changeStateValues={e => setEmail(e.target.value)}
-               />
-
-               <InputSimple
-                  labelText="ubicación"
-                  type="text"
-                  name="location"
-                  value={location}
-                  changeStateValues={e => setLocation(e.target.value)}
-               />
-
-               <InputSelect
-                  labelText="nivel"
-                  key="nivel"
-                  name="level"
-                  value={level}
-                  changeStateValues={e => setLevel(e.target.value)}
-                  list={levelList}
-               ></InputSelect>
-
-               <button
-                  className="btn btn-block"
-                  type="submit"
-                  disabled={isLoading}
+            <Stack direction="column">
+               <Stack
+                  direction={{ xs: 'column', sm: 'row' }}
+                  spacing={2}
+                  justifyContent="space-between"
+                  alignItems={{ xs: 'center', sm: 'flex-start' }}
+                  sx={{ mb: 2 }}
                >
-                  {isLoading ? 'Actualizando...' : 'Guardar cambios'}
-               </button>
-            </div>
-         </form>
-      </Wrapper>
+                  <TextField
+                     label="nombre"
+                     name="name"
+                     value={name}
+                     onChange={e => setName(e.target.value)}
+                     sx={{ flex: 1, width: { xs: '100%', sm: 'auto' } }}
+                  />
+
+                  <TextField
+                     label="apellido"
+                     name="lastName"
+                     value={lastName}
+                     onChange={e => setLastName(e.target.value)}
+                     sx={{ flex: 1, width: { xs: '100%', sm: 'auto' } }}
+                  />
+               </Stack>
+
+               <Stack
+                  direction={{ xs: 'column', sm: 'row' }}
+                  spacing={2}
+                  justifyContent="space-between"
+                  alignItems={{ xs: 'center', sm: 'flex-start' }}
+                  sx={{ mb: 2 }}
+               >
+                  <TextField
+                     label="correo"
+                     name="email"
+                     value={email}
+                     onChange={e => setEmail(e.target.value)}
+                     sx={{ flex: 1, width: { xs: '100%', sm: 'auto' } }}
+                  />
+
+                  <TextField
+                     label="ubicación"
+                     name="location"
+                     value={location}
+                     onChange={e => setLocation(e.target.value)}
+                     sx={{ flex: 1, width: { xs: '100%', sm: 'auto' } }}
+                  />
+               </Stack>
+
+               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                  <Box mr={2} sx={{ width: '100%' }}>
+                     <SelectSingle
+                        title="nivel"
+                        name="level"
+                        value={level}
+                        changeValueInState={e => setLevel(e.target.value)}
+                        selectOptions={levelList}
+                        sx={{ width: { xs: '100%', sm: '50%' } }}
+                     />
+                  </Box>
+               </Stack>
+
+               <Box
+                  sx={{
+                     mt: 2,
+                     display: 'flex',
+                     justifyContent: 'flex-end',
+                  }}
+               >
+                  <ButtonEnviar
+                     handleSubmit={handleSubmit}
+                     isLoading={isLoading}
+                  />
+               </Box>
+            </Stack>
+         </Container>
+      </Paper>
    );
 };
 
 export default Profile;
-
-const Wrapper = styled.section`
-   border-radius: var(--borderRadius);
-   width: 100%;
-   background: var(--white);
-   padding: 3rem 2rem 4rem;
-   box-shadow: var(--shadow-2);
-   h3 {
-      margin-top: 0;
-   }
-   .form {
-      margin: 0;
-      border-radius: 0;
-      box-shadow: none;
-      padding: 0;
-      max-width: 100%;
-      width: 100%;
-   }
-   .form-row {
-      margin-bottom: 0;
-   }
-   .form-center {
-      display: grid;
-      row-gap: 0.5rem;
-   }
-   .form-center button {
-      align-self: end;
-      height: 35px;
-      margin-top: 1rem;
-   }
-   .btn-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      column-gap: 1rem;
-      align-self: flex-end;
-      margin-top: 0.5rem;
-      button {
-         height: 35px;
-      }
-   }
-   .clear-btn {
-      background: var(--grey-500);
-   }
-   .clear-btn:hover {
-      background: var(--black);
-   }
-   @media (min-width: 992px) {
-      .form-center {
-         grid-template-columns: 1fr 1fr;
-         align-items: center;
-         column-gap: 1rem;
-      }
-      .btn-container {
-         margin-top: 0;
-      }
-   }
-   @media (min-width: 1120px) {
-      .form-center {
-         grid-template-columns: 1fr 1fr 1fr;
-      }
-      .form-center button {
-         margin-top: 0;
-      }
-   }
-`;
