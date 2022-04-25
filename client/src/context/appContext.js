@@ -304,7 +304,7 @@ const AppProvider = ({ children }) => {
    };
 
    // aqui creo list4Problems en el reducer en GET_RECIPES_SUCCESS
-   // list4Problems: [], ----  search, searchOil, searchProblem, sort
+   // list4Problems: [],
    const getRecipes = async () => {
       const { search, searchOil, searchProblem, sort, page } = state;
       let url = `/recipes?page=${page}&oilsList=${searchOil}&problemsList=${searchProblem}&sort=${sort}`;

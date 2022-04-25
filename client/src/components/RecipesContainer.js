@@ -14,8 +14,6 @@ const RecipesContainer = () => {
       getRecipes, recipes, isLoading, page, totalRecipes, search, searchOil,
       searchProblem, sort, numOfPages } = useAppContext();
 
-   // const [notOnHoldRecipes, setNotOnHoldRecipes] = useState([]); // yellow filtro en front
-
    // ♏♏♏♏
    const [modalOpen, setModalOpen] = useState(false);
    const [recipeOpened, setRecipeOpened] = useState('');

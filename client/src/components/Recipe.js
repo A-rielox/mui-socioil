@@ -18,13 +18,10 @@ const Recipe = ({
    desc,
    createdAt,
    createdBy,
-   userNane, // quitar
-   userLevel, // quitar
    openModal,
    onHold,
 }) => {
-   const { /* setEditRecipe, deleteRecipe, */ user, authFetch } =
-      useAppContext();
+   const { user, authFetch } = useAppContext();
    const [recipeUser, setRecipeUser] = useState(null);
 
    useEffect(() => {
