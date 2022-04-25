@@ -106,7 +106,9 @@ const AddRecipe = () => {
                width: '100%',
             }}
          >
-            <h3>{isEditing ? 'editar recetita' : 'añadir recetita'} </h3>
+            <StyledH3>
+               {isEditing ? 'editar recetita' : 'añadir recetita'}{' '}
+            </StyledH3>
 
             {showAlert && <Alert />}
 
@@ -169,7 +171,7 @@ const AddRecipe = () => {
                   handleSubmit={handleSubmit}
                   isLoading={isLoading}
                />
-               <ButtonLimpiar clearValues={clearValues} />
+               <ButtonLimpiar onClick={clearValues} />
             </Stack>
          </Paper>
       </Box>
@@ -181,3 +183,6 @@ export default AddRecipe;
 // h3 {
 // margin-top: 0;
 // }
+const StyledH3 = styled.h3`
+   margin-top: 0;
+`;

@@ -24,7 +24,7 @@ export const ButtonEnviar = ({ handleSubmit, isLoading }) => {
    );
 };
 
-export const ButtonLimpiar = ({ clearValues }) => {
+export const ButtonLimpiar = ({ onClick }) => {
    return (
       <Button
          variant="contained"
@@ -39,7 +39,7 @@ export const ButtonLimpiar = ({ clearValues }) => {
          }}
          onClick={e => {
             e.preventDefault();
-            clearValues();
+            onClick();
          }}
       >
          limpiar

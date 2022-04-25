@@ -2,6 +2,15 @@ import { useAppContext } from '../context/appContext';
 import { InputSimple, InputSelect } from '.';
 import styled from 'styled-components';
 
+// ---------------- MUI
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
+
+import SelectSingle from '../components/mui/SelectSingle';
+import { ButtonLimpiar } from '../components/mui/Button';
+
 const SearchContainer = () => {
    const {
       isLoading,
@@ -26,7 +35,7 @@ const SearchContainer = () => {
    };
 
    const handleSubmit = e => {
-      e.preventDefault();
+      // e.preventDefault();
       clearFilters();
    };
 
@@ -37,55 +46,58 @@ const SearchContainer = () => {
 
             {/* search position */}
             <div className="form-center">
-               <InputSimple
-                  labelText="en el titulo"
-                  type="text"
-                  name="search"
-                  value={search}
-                  changeStateValues={handleSearch}
-               ></InputSimple>
+               <Stack direction="column">
+                  <Stack
+                     direction={{ xs: 'column', sm: 'row' }}
+                     spacing={2}
+                     sx={{ mb: 2 }}
+                  >
+                     {/* titulo */}
+                     <TextField
+                        label="Titulo"
+                        placeholder="Que el título contenga..."
+                        name="search"
+                        value={search}
+                        onChange={handleSearch}
+                        sx={{ width: { xs: '100%', sm: '50%' } }}
+                     />
 
-               {/* search by oil */}
-               <InputSelect
-                  labelText="con aceitito"
-                  name="searchOil"
-                  value={searchOil}
-                  changeStateValues={handleSearch}
-                  list={['todos', ...oilsOptions]}
-               ></InputSelect>
+                     {/* aceite */}
+                     <SelectSingle
+                        title="Con aceitito"
+                        name="searchOil"
+                        value={searchOil}
+                        changeValueInState={handleSearch}
+                        selectOptions={['todos', ...oilsOptions]}
+                        sx={{ width: { xs: '100%', sm: '50%' } }}
+                     />
+                  </Stack>
 
-               {/* search by problem */}
-               {/* <InputSelect
-                  labelText="con problema"
-                  name="searchProblem"
-                  value={searchProblem}
-                  changeStateValues={handleSearch}
-                  list={['todos', ...list4Problems]}
-               ></InputSelect> */}
-               <InputSimple
-                  labelText="con problema"
-                  type="text"
-                  name="searchProblem"
-                  value={searchProblem}
-                  changeStateValues={handleSearch}
-               ></InputSimple>
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                     {/* problem */}
+                     <TextField
+                        label="Con problema"
+                        name="searchProblem"
+                        value={searchProblem}
+                        onChange={handleSearch}
+                        sx={{ width: { xs: '100%', sm: '50%' } }}
+                     />
 
-               {/* sort */}
-               <InputSelect
-                  labelText="orden"
-                  name="sort"
-                  value={sort}
-                  changeStateValues={handleSearch}
-                  list={sortOptions}
-               ></InputSelect>
+                     {/* sort */}
+                     <SelectSingle
+                        title="Orden"
+                        name="sort"
+                        value={sort}
+                        changeValueInState={handleSearch}
+                        selectOptions={sortOptions}
+                        sx={{ width: { xs: '100%', sm: '50%' } }}
+                     />
+                  </Stack>
+               </Stack>
 
-               <button
-                  className="btn btn-block btn-danger"
-                  disabled={isLoading}
-                  onClick={handleSubmit}
-               >
-                  limpiar filtros
-               </button>
+               <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end' }}>
+                  <ButtonLimpiar onClick={handleSubmit} />
+               </Box>
             </div>
          </form>
       </Wrapper>
@@ -105,19 +117,17 @@ const Wrapper = styled.section`
       padding-top: 1rem;
    }
 
-   .form-input,
-   .form-select,
-   .btn-block {
-      height: 35px;
-   }
-   .form-row {
-      margin-bottom: 0;
-   }
-   .form-center {
+   /* .form-center {
       display: grid;
       grid-template-columns: 1fr;
       column-gap: 2rem;
       row-gap: 0.5rem;
+   } */
+
+   .form-input,
+   .form-select,
+   .btn-block {
+      height: 35px;
    }
    h5 {
       font-weight: 700;
@@ -127,14 +137,14 @@ const Wrapper = styled.section`
       margin-top: 1rem;
    }
    @media (min-width: 768px) {
-      .form-center {
+      /* .form-center {
          grid-template-columns: 1fr 1fr;
-      }
+      } */
    }
    @media (min-width: 992px) {
-      .form-center {
+      /* .form-center {
          grid-template-columns: 1fr 1fr 1fr;
-      }
+      } */
       .btn-block {
          margin-top: 0;
       }
