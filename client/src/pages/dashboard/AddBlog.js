@@ -1,7 +1,16 @@
 import React, { useEffect } from 'react';
 import { useAppContext } from '../../context/appContext';
-import { Alert, Editor, InputSimple, InputSelect } from '../../components';
+import { Alert, Editor } from '../../components';
 import styled from 'styled-components';
+
+// MUI
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
+import SelectSingle from '../../components/mui/SelectSingle';
+import { ButtonEnviar, ButtonLimpiar } from '../../components/mui/Button';
 
 const AddBlog = () => {
    // para el editor inicialmente ocupaba este
@@ -35,8 +44,6 @@ const AddBlog = () => {
 
    // PRIMERO CAMBIO TODO EN EL STATE ( LOS DATOS DE LA RECETA ), Y LUEGO LO MANDO
    const handleBlogInput = e => {
-      // console.log(e.target);
-      // console.log(e);
       if (!e.target) {
          const name = 'descBlog';
          const value = e;
@@ -45,8 +52,6 @@ const AddBlog = () => {
       } else {
          const name = e.target.name;
          const value = e.target.value;
-
-         // console.log(e.target.name);
 
          changeStateValues({ name, value });
       }
@@ -77,89 +82,79 @@ const AddBlog = () => {
    };
 
    return (
-      <Wrapper>
-         <form className="form">
-            <h3>{isEditingBlog ? 'editar blog' : 'añadir blog'} </h3>
-            {showAlert && <Alert />}
+      <Box
+         sx={{
+            borderRadius: 'var(--borderRadius)',
+            width: '100%',
+            background: 'var(--white)',
+            padding: '3rem 2rem 4rem',
+            boxShadow: 'var(--shadow-2)',
+         }}
+      >
+         <Container maxWidth="md">
+            <Paper
+               component="form"
+               sx={{
+                  margin: 0,
+                  borderRadius: 0,
+                  boxShadow: 'none',
+                  padding: 0,
+                  width: '100%',
+               }}
+            >
+               <h3>{isEditingBlog ? 'editar blog' : 'añadir blog'} </h3>
+               {showAlert && <Alert />}
 
-            <div className="form-center">
-               {/* title */}
-               <InputSimple
-                  inputClass={'titleRow'}
-                  type="text"
-                  labelText="Título"
+               <TextField
+                  label="Título"
+                  multiline
+                  fullWidth
+                  maxRows={2}
                   name="titleBlog"
                   value={titleBlog}
-                  changeStateValues={handleBlogInput}
+                  onChange={handleBlogInput}
+                  sx={{ mb: 2 }}
                />
 
-               {/* CATEGORIA */}
-
-               <InputSelect
-                  labelText="Categoría"
-                  inputClass={'category'}
-                  key="category"
+               <SelectSingle
+                  title="Categoría"
                   name="category"
                   value={category}
-                  changeStateValues={handleBlogInput}
-                  list={categoryOptions}
-               ></InputSelect>
+                  changeValueInState={handleBlogInput}
+                  selectOptions={categoryOptions}
+                  fullWidth
+                  sx={{ mb: 2 }}
+               />
 
-               <Editor initialValue={descBlog} setContent={handleBlogInput} />
+               <Wrapper>
+                  <Editor
+                     initialValue={descBlog}
+                     setContent={handleBlogInput}
+                  />
+               </Wrapper>
 
-               <div className="btn-container">
-                  <button
-                     className="btn btn-block submit-btn"
-                     type="submit"
-                     onClick={handleSubmit}
-                     disabled={isLoading}
-                  >
-                     enviar
-                  </button>
-
-                  {/* este tiene q ir despues del submit button  */}
-                  <button
-                     className="btn btn-block clear-btn"
-                     onClick={e => {
-                        e.preventDefault();
-                        clearValues();
-                     }}
-                  >
-                     limpiar
-                  </button>
-               </div>
-            </div>
-         </form>
-      </Wrapper>
+               <Stack
+                  direction={{ xs: 'column', sm: 'row' }}
+                  spacing={2}
+                  justifyContent="flex-end"
+                  alignItems="flex-end"
+                  sx={{ mt: 2 }}
+               >
+                  <ButtonEnviar
+                     handleSubmit={handleSubmit}
+                     isLoading={isLoading}
+                  />
+                  <ButtonLimpiar onClick={clearValues} />
+               </Stack>
+            </Paper>
+         </Container>
+      </Box>
    );
 };
 
 export default AddBlog;
 
 const Wrapper = styled.section`
-   border-radius: var(--borderRadius);
-   width: 100%;
-   background: var(--white);
-   padding: 3rem 2rem 4rem;
-   box-shadow: var(--shadow-2);
-
-   h3 {
-      margin-top: 0;
-   }
-   .form {
-      margin: 0;
-      border-radius: 0;
-      box-shadow: none;
-      padding: 0;
-      max-width: 100%;
-      width: 100%;
-   }
-
-   .form-center {
-      display: flex;
-      flex-direction: column;
-   }
-
    .jodit-react-container {
       width: 100%;
 
@@ -171,7 +166,6 @@ const Wrapper = styled.section`
 
       ul {
          list-style-type: disc;
-         /* padding: 1rem; */
          margin-top: 0;
          padding-top: 0;
          padding-bottom: 0.5rem;
@@ -181,40 +175,5 @@ const Wrapper = styled.section`
 
    .jodit-status-bar {
       visibility: collapse;
-   }
-
-   .form-center button {
-      align-self: end;
-      height: 35px;
-      margin-top: 1rem;
-   }
-   .btn-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      column-gap: 1rem;
-      align-self: flex-end;
-      margin-top: 0.5rem;
-   }
-   .clear-btn {
-      background: var(--grey-500);
-   }
-   .clear-btn:hover {
-      background: var(--grey-700);
-   }
-
-   @media (min-width: 1120px) {
-      .form {
-         margin: 0 auto;
-         max-width: 740px;
-      }
-
-      .btn-container {
-         row-gap: 1rem;
-
-         button {
-            height: auto;
-            padding: 1rem 2.5rem;
-         }
-      }
    }
 `;

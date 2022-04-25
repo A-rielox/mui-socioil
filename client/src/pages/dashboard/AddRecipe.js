@@ -108,7 +108,7 @@ const AddRecipe = () => {
                }}
             >
                <StyledH3>
-                  {isEditing ? 'editar recetita' : 'añadir recetita'}{' '}
+                  {isEditing ? 'editar recetita' : 'añadir recetita'}
                </StyledH3>
 
                {showAlert && <Alert />}
@@ -182,9 +182,6 @@ const AddRecipe = () => {
 
 export default AddRecipe;
 
-// h3 {
-// margin-top: 0;
-// }
 const StyledH3 = styled.h3`
    margin-top: 0;
 `;
