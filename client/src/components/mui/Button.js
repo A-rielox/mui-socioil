@@ -3,11 +3,12 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
 
-export const ButtonEnviar = ({ handleSubmit }) => {
+export const ButtonEnviar = ({ handleSubmit, isLoading }) => {
    return (
       <Button
          variant="contained"
          startIcon={<SendIcon />}
+         disabled={isLoading}
          sx={{
             width: { xs: '100%', sm: '25%' },
             bgcolor: 'var(--primary-500)',
@@ -23,7 +24,7 @@ export const ButtonEnviar = ({ handleSubmit }) => {
    );
 };
 
-export const ButtonLimpiar = () => {
+export const ButtonLimpiar = ({ clearValues }) => {
    return (
       <Button
          variant="contained"
@@ -35,6 +36,10 @@ export const ButtonLimpiar = () => {
                backgroundColor: 'var(--primary-100)',
                color: 'var(--primary-700)',
             },
+         }}
+         onClick={e => {
+            e.preventDefault();
+            clearValues();
          }}
       >
          limpiar

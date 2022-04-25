@@ -11,7 +11,7 @@ const createRecipe = async (req, res) => {
    const {oilsList, problemsList, title, desc} = req.body;
    console.log(req.body);
 
-   if (!title || oilsList.length === 0 || problemsList.length === 0 || !desc) {
+   if (!title || oilsList.length === 0 || !problemsList || !desc) {
       throw new BadRequestError('Favor proveer todos los valores');
    }
 

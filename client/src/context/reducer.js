@@ -194,6 +194,7 @@ const reducer = (state, action) => {
          desc: '',
          oilsList: [],
          problemsList: [],
+         molestias: '',
          oil1: '',
          oil2: '',
          oil3: '',

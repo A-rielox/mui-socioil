@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { useAppContext } from '../../context/appContext';
 import styled from 'styled-components';
@@ -32,7 +32,6 @@ const AddRecipe = () => {
       title,
       desc,
 
-      oilsOptions,
       changeStateValues,
       isEditing,
       editRecipe,
@@ -47,7 +46,12 @@ const AddRecipe = () => {
    useEffect(() => {
       let tempProblemsList = molestias.split(',');
       tempProblemsList = tempProblemsList.map(problem => problem.trim());
-      changeStateValues({ name: 'problemsList', value: tempProblemsList });
+
+      if (tempProblemsList[0] === '') {
+         changeStateValues({ name: 'problemsList', value: null });
+      } else {
+         changeStateValues({ name: 'problemsList', value: tempProblemsList });
+      }
    }, [molestias]);
 
    const handleRecipeInput = e => {
@@ -61,9 +65,10 @@ const AddRecipe = () => {
 
    const handleSubmit = e => {
       e.preventDefault();
+      console.log(problemsList);
 
       // prettier-ignore
-      if (!title || !desc || oilsList.length === 0 || problemsList.length === 0) {
+      if (!title || !desc || oilsList.length === 0 || !problemsList) {
          displayAlert();
          return;
       }
@@ -77,7 +82,7 @@ const AddRecipe = () => {
       createRecipe();
 
       // limpia campos tras crear receta
-      // clearValues();
+      // clearValues(); red MIENTRAS PRUEBO red
    };
 
    return (
@@ -160,9 +165,11 @@ const AddRecipe = () => {
                alignItems="flex-end"
                sx={{ mt: 2 }}
             >
-               <ButtonEnviar handleSubmit={handleSubmit} />
-
-               <ButtonLimpiar />
+               <ButtonEnviar
+                  handleSubmit={handleSubmit}
+                  isLoading={isLoading}
+               />
+               <ButtonLimpiar clearValues={clearValues} />
             </Stack>
          </Paper>
       </Box>
@@ -171,16 +178,6 @@ const AddRecipe = () => {
 
 export default AddRecipe;
 
-const Wrapper = styled.section`
-   h3 {
-      margin-top: 0;
-   }
-   .form {
-      margin: 0;
-      border-radius: 0;
-      box-shadow: none;
-      padding: 0;
-      max-width: 100%;
-      width: 100%;
-   }
-`;
+// h3 {
+// margin-top: 0;
+// }
