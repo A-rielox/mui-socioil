@@ -47,7 +47,11 @@ import {
 const token = localStorage.getItem('token');
 const user = localStorage.getItem('user');
 const userLocation = localStorage.getItem('location');
+/* 
 
+previo sidebar
+
+*/
 export const initialState = {
    isLoading: false,
    showAlert: false,
