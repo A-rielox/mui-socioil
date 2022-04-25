@@ -8,6 +8,7 @@ import { Alert } from '../../components';
 
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 
@@ -95,85 +96,86 @@ const AddRecipe = () => {
             boxShadow: 'var(--shadow-2)',
          }}
       >
-         <Paper
-            component="form"
-            sx={{
-               margin: 0,
-               borderRadius: 0,
-               boxShadow: 'none',
-               padding: 0,
-               maxWidth: '100%',
-               width: '100%',
-            }}
-         >
-            <StyledH3>
-               {isEditing ? 'editar recetita' : 'añadir recetita'}{' '}
-            </StyledH3>
-
-            {showAlert && <Alert />}
-
-            <TextField
-               label="Titulo"
-               multiline
-               fullWidth
-               maxRows={2}
-               name="title"
-               value={title}
-               onChange={handleRecipeInput}
-               sx={{ mb: 2 }}
-            />
-
-            <TextField
-               label="Descripción"
-               multiline
-               fullWidth
-               maxRows={4}
-               // rows={4} no se puede cuando hay maxRows
-               name="desc"
-               value={desc}
-               onChange={handleRecipeInput}
-               sx={{ mb: 2 }}
-            />
-
-            <Stack
-               direction={{ xs: 'column', sm: 'row' }}
-               spacing={2}
-               justifyContent="space-between"
-               alignItems={{ xs: 'center', sm: 'flex-start' }}
+         <Container maxWidth="md">
+            <Paper
+               component="form"
+               sx={{
+                  margin: 0,
+                  borderRadius: 0,
+                  boxShadow: 'none',
+                  padding: 0,
+                  width: '100%',
+               }}
             >
-               {/* ACEITES */}
-               <SelectMultiple
-                  initValue={oilsList}
-                  changeStateValues={changeStateValues}
+               <StyledH3>
+                  {isEditing ? 'editar recetita' : 'añadir recetita'}{' '}
+               </StyledH3>
+
+               {showAlert && <Alert />}
+
+               <TextField
+                  label="Titulo"
+                  multiline
+                  fullWidth
+                  maxRows={2}
+                  name="title"
+                  value={title}
+                  onChange={handleRecipeInput}
+                  sx={{ mb: 2 }}
                />
 
-               {/* PROBLEMS */}
                <TextField
-                  label="Molestias"
-                  placeholder="Separa las molestias con una coma (,)"
+                  label="Descripción"
+                  fullWidth
                   multiline
                   maxRows={4}
-                  name="molestias"
-                  value={molestias}
+                  // rows={4} no se puede cuando hay maxRows
+                  name="desc"
+                  value={desc}
                   onChange={handleRecipeInput}
-                  sx={{ flex: 1, width: { xs: '100%', sm: 'auto' } }}
+                  sx={{ mb: 2 }}
                />
-            </Stack>
 
-            <Stack
-               direction={{ xs: 'column', sm: 'row' }}
-               spacing={2}
-               justifyContent="flex-end"
-               alignItems="flex-end"
-               sx={{ mt: 2 }}
-            >
-               <ButtonEnviar
-                  handleSubmit={handleSubmit}
-                  isLoading={isLoading}
-               />
-               <ButtonLimpiar onClick={clearValues} />
-            </Stack>
-         </Paper>
+               <Stack
+                  direction={{ xs: 'column', sm: 'row' }}
+                  spacing={2}
+                  justifyContent="space-between"
+                  alignItems={{ xs: 'center', sm: 'flex-start' }}
+               >
+                  {/* ACEITES */}
+                  <SelectMultiple
+                     initValue={oilsList}
+                     changeStateValues={changeStateValues}
+                  />
+
+                  {/* PROBLEMS */}
+                  <TextField
+                     label="Molestias"
+                     placeholder="Separa las molestias con una coma (,)"
+                     multiline
+                     maxRows={4}
+                     name="molestias"
+                     value={molestias}
+                     onChange={handleRecipeInput}
+                     sx={{ flex: 1, width: { xs: '100%', sm: 'auto' } }}
+                  />
+               </Stack>
+
+               <Stack
+                  direction={{ xs: 'column', sm: 'row' }}
+                  spacing={2}
+                  justifyContent="flex-end"
+                  alignItems="flex-end"
+                  sx={{ mt: 2 }}
+               >
+                  <ButtonEnviar
+                     handleSubmit={handleSubmit}
+                     isLoading={isLoading}
+                  />
+                  <ButtonLimpiar onClick={clearValues} />
+               </Stack>
+            </Paper>
+         </Container>
       </Box>
    );
 };
