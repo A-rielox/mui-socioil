@@ -3,6 +3,8 @@ import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { SidebarSmallScreen, SidebarBigScreen, Navbar } from '../../components';
 
+import SidebarBigMui from '../../components/mui/SidebarBigScreen';
+
 const SharedLayout = () => {
    const { user } = useAppContext();
 
@@ -10,15 +12,16 @@ const SharedLayout = () => {
       <Wrapper>
          <main className="dashboard">
             <SidebarSmallScreen />
-            <SidebarBigScreen />
+            {/* <SidebarBigScreen /> */}
+            <SidebarBigMui />
 
-            <div>
-               <Navbar />
+            {/* <div> */}
+            {/* <Navbar /> */}
 
-               <div className="dashboard-page">
-                  <Outlet />
-               </div>
+            <div className="dashboard-page">
+               <Outlet />
             </div>
+            {/* </div> */}
          </main>
       </Wrapper>
    );

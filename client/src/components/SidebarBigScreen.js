@@ -29,6 +29,13 @@ const SidebarBigScreen = () => {
 
 export default SidebarBigScreen;
 
+/* 
+
+import links from '../../utils/links';
+import { NavLink } from 'react-router-dom';
+
+*/
+
 const Wrapper = styled.aside`
    display: none;
 

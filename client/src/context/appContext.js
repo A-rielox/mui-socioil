@@ -63,7 +63,7 @@ export const initialState = {
    userLocation: userLocation || '',
    jobLocation: userLocation || '',
    //sideBar
-   showSidebar: false,
+   showSidebar: true,
    //================ RECIPE
    isEditing: false,
    editRecipeId: '',
@@ -233,8 +233,8 @@ const AppProvider = ({ children }) => {
       clearAlert();
    };
 
-   const toggleSidebar = () => {
-      dispatch({ type: TOGGLE_SIDEBAR });
+   const toggleSidebar = ({ value }) => {
+      dispatch({ type: TOGGLE_SIDEBAR, payload: { value } });
    };
 
    const logoutUser = () => {
