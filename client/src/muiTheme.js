@@ -57,5 +57,50 @@ export const dashboardTheme = createTheme({
             },
          },
       },
+      //    side navbar
+      MuiListItemIcon: {
+         styleOverrides: {
+            root: {
+               color: 'var(--primary-500)',
+               fontSize: '2rem',
+               '&.activeLink': {
+                  color: 'var(--primary-700)',
+               },
+            },
+         },
+      },
+      MuiListItemText: {
+         styleOverrides: {
+            root: {
+               '& span': {
+                  color: 'var(--textColor)',
+                  fontSize: '1rem',
+                  textTransform: 'capitalize',
+               },
+               '&.activeLink span': {
+                  color: 'var(--primary-700)',
+               },
+            },
+         },
+      },
+      MuiListItemButton: {
+         styleOverrides: {
+            root: {
+               '&.activeLink': {
+                  backgroundColor: 'var(--primary-100)',
+               },
+               '&:hover': {
+                  backgroundColor: 'var(--primary-700)',
+
+                  '& .MuiListItemIcon-root': {
+                     color: 'white',
+                  },
+                  '& .MuiListItemText-root span': {
+                     color: 'white',
+                  },
+               },
+            },
+         },
+      },
    },
 });
