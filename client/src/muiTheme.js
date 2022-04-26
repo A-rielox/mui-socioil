@@ -62,7 +62,7 @@ export const dashboardTheme = createTheme({
          styleOverrides: {
             root: {
                color: 'var(--primary-500)',
-               fontSize: '2rem',
+               fontSize: '1.5rem',
                '&.activeLink': {
                   color: 'var(--primary-700)',
                },
@@ -74,7 +74,7 @@ export const dashboardTheme = createTheme({
             root: {
                '& span': {
                   color: 'var(--textColor)',
-                  fontSize: '1rem',
+                  fontSize: '0.8rem',
                   textTransform: 'capitalize',
                },
                '&.activeLink span': {

@@ -8,6 +8,9 @@ import styled from 'styled-components';
 import { AnimatePresence } from 'framer-motion';
 import DisplayedRecipe from './modal/DisplayedRecipe';
 
+// MUI
+import RecipeMui from './mui/RecipeMui';
+
 const RecipesContainer = () => {
    // prettier-ignore
    const {
@@ -51,7 +54,9 @@ const RecipesContainer = () => {
 
          <div className="recipes">
             {recipes.map(recipe => {
-               return <Recipe key={recipe._id} {...recipe} openModal={open} />;
+               return (
+                  <RecipeMui key={recipe._id} {...recipe} openModal={open} />
+               );
             })}
          </div>
 
