@@ -15,6 +15,10 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
+import Checkbox from '@mui/material/Checkbox';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
+
 import { useEffect, useState } from 'react';
 import Loading from '../Loading';
 import { useAppContext } from '../../context/appContext';
@@ -121,9 +125,10 @@ export default function RecipeReviewCard({
          </CardContent>
 
          <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
-               <FavoriteIcon />
-            </IconButton>
+            <Checkbox
+               /* {...label} */ icon={<FavoriteBorder />}
+               checkedIcon={<Favorite sx={{ color: 'red' }} />}
+            />
 
             <IconButton aria-label="share">
                <ShareIcon />

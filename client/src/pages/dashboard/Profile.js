@@ -49,95 +49,97 @@ const Profile = () => {
    };
 
    return (
-      <Paper
-         sx={{
-            borderRadius: 'var(--borderRadius)',
-            width: '100%',
-            padding: '3rem 2rem 4rem',
-            boxShadow: 'var(--shadow-2)',
-         }}
-      >
-         <Container maxWidth="md">
-            <h3>perfil </h3>
-            {showAlert && <Alert />}
+      <Container sx={{ mt: 2 }} maxWidth="lg">
+         <Paper
+            sx={{
+               borderRadius: 'var(--borderRadius)',
+               width: '100%',
+               padding: '3rem 2rem 4rem',
+               boxShadow: 'var(--shadow-2)',
+            }}
+         >
+            <Container maxWidth="md">
+               <h3>perfil </h3>
+               {showAlert && <Alert />}
 
-            <Stack direction="column">
-               <Stack
-                  direction={{ xs: 'column', sm: 'row' }}
-                  spacing={2}
-                  justifyContent="space-between"
-                  alignItems={{ xs: 'center', sm: 'flex-start' }}
-                  sx={{ mb: 2 }}
-               >
-                  <TextField
-                     label="nombre"
-                     name="name"
-                     value={name}
-                     onChange={e => setName(e.target.value)}
-                     sx={{ flex: 1, width: { xs: '100%', sm: 'auto' } }}
-                  />
+               <Stack direction="column">
+                  <Stack
+                     direction={{ xs: 'column', sm: 'row' }}
+                     spacing={2}
+                     justifyContent="space-between"
+                     alignItems={{ xs: 'center', sm: 'flex-start' }}
+                     sx={{ mb: 2 }}
+                  >
+                     <TextField
+                        label="nombre"
+                        name="name"
+                        value={name}
+                        onChange={e => setName(e.target.value)}
+                        sx={{ flex: 1, width: { xs: '100%', sm: 'auto' } }}
+                     />
 
-                  <TextField
-                     label="apellido"
-                     name="lastName"
-                     value={lastName}
-                     onChange={e => setLastName(e.target.value)}
-                     sx={{ flex: 1, width: { xs: '100%', sm: 'auto' } }}
-                  />
-               </Stack>
+                     <TextField
+                        label="apellido"
+                        name="lastName"
+                        value={lastName}
+                        onChange={e => setLastName(e.target.value)}
+                        sx={{ flex: 1, width: { xs: '100%', sm: 'auto' } }}
+                     />
+                  </Stack>
 
-               <Stack
-                  direction={{ xs: 'column', sm: 'row' }}
-                  spacing={2}
-                  justifyContent="space-between"
-                  alignItems={{ xs: 'center', sm: 'flex-start' }}
-                  sx={{ mb: 2 }}
-               >
-                  <TextField
-                     label="correo"
-                     name="email"
-                     value={email}
-                     onChange={e => setEmail(e.target.value)}
-                     sx={{ flex: 1, width: { xs: '100%', sm: 'auto' } }}
-                  />
+                  <Stack
+                     direction={{ xs: 'column', sm: 'row' }}
+                     spacing={2}
+                     justifyContent="space-between"
+                     alignItems={{ xs: 'center', sm: 'flex-start' }}
+                     sx={{ mb: 2 }}
+                  >
+                     <TextField
+                        label="correo"
+                        name="email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        sx={{ flex: 1, width: { xs: '100%', sm: 'auto' } }}
+                     />
 
-                  <TextField
-                     label="ubicación"
-                     name="location"
-                     value={location}
-                     onChange={e => setLocation(e.target.value)}
-                     sx={{ flex: 1, width: { xs: '100%', sm: 'auto' } }}
-                  />
-               </Stack>
+                     <TextField
+                        label="ubicación"
+                        name="location"
+                        value={location}
+                        onChange={e => setLocation(e.target.value)}
+                        sx={{ flex: 1, width: { xs: '100%', sm: 'auto' } }}
+                     />
+                  </Stack>
 
-               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                  <Box mr={2} sx={{ width: '100%' }}>
-                     <SelectSingle
-                        title="nivel"
-                        name="level"
-                        value={level}
-                        changeValueInState={e => setLevel(e.target.value)}
-                        selectOptions={levelList}
-                        sx={{ width: { xs: '100%', sm: '50%' } }}
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                     <Box mr={2} sx={{ width: '100%' }}>
+                        <SelectSingle
+                           title="nivel"
+                           name="level"
+                           value={level}
+                           changeValueInState={e => setLevel(e.target.value)}
+                           selectOptions={levelList}
+                           sx={{ width: { xs: '100%', sm: '50%' } }}
+                        />
+                     </Box>
+                  </Stack>
+
+                  <Box
+                     sx={{
+                        mt: 2,
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                     }}
+                  >
+                     <ButtonEnviar
+                        handleSubmit={handleSubmit}
+                        isLoading={isLoading}
                      />
                   </Box>
                </Stack>
-
-               <Box
-                  sx={{
-                     mt: 2,
-                     display: 'flex',
-                     justifyContent: 'flex-end',
-                  }}
-               >
-                  <ButtonEnviar
-                     handleSubmit={handleSubmit}
-                     isLoading={isLoading}
-                  />
-               </Box>
-            </Stack>
-         </Container>
-      </Paper>
+            </Container>
+         </Paper>
+      </Container>
    );
 };
 

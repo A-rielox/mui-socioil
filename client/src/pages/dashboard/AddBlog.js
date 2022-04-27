@@ -82,73 +82,75 @@ const AddBlog = () => {
    };
 
    return (
-      <Box
-         sx={{
-            borderRadius: 'var(--borderRadius)',
-            width: '100%',
-            background: 'var(--white)',
-            padding: '3rem 2rem 4rem',
-            boxShadow: 'var(--shadow-2)',
-         }}
-      >
-         <Container maxWidth="md">
-            <Paper
-               component="form"
-               sx={{
-                  margin: 0,
-                  borderRadius: 0,
-                  boxShadow: 'none',
-                  padding: 0,
-                  width: '100%',
-               }}
-            >
-               <h3>{isEditingBlog ? 'editar blog' : 'añadir blog'} </h3>
-               {showAlert && <Alert />}
-
-               <TextField
-                  label="Título"
-                  multiline
-                  fullWidth
-                  maxRows={2}
-                  name="titleBlog"
-                  value={titleBlog}
-                  onChange={handleBlogInput}
-                  sx={{ mb: 2 }}
-               />
-
-               <SelectSingle
-                  title="Categoría"
-                  name="category"
-                  value={category}
-                  changeValueInState={handleBlogInput}
-                  selectOptions={categoryOptions}
-                  fullWidth
-                  sx={{ mb: 2 }}
-               />
-
-               <Wrapper>
-                  <Editor
-                     initialValue={descBlog}
-                     setContent={handleBlogInput}
-                  />
-               </Wrapper>
-
-               <Stack
-                  direction={{ xs: 'column', sm: 'row' }}
-                  spacing={2}
-                  justifyContent="flex-end"
-                  alignItems="flex-end"
-                  sx={{ mt: 2 }}
+      <Container sx={{ mt: 2 }} maxWidth="lg">
+         <Box
+            sx={{
+               borderRadius: 'var(--borderRadius)',
+               width: '100%',
+               background: 'var(--white)',
+               padding: '3rem 2rem 4rem',
+               boxShadow: 'var(--shadow-2)',
+            }}
+         >
+            <Container maxWidth="md">
+               <Paper
+                  component="form"
+                  sx={{
+                     margin: 0,
+                     borderRadius: 0,
+                     boxShadow: 'none',
+                     padding: 0,
+                     width: '100%',
+                  }}
                >
-                  <ButtonEnviar
-                     handleSubmit={handleSubmit}
-                     isLoading={isLoading}
+                  <h3>{isEditingBlog ? 'editar blog' : 'añadir blog'} </h3>
+                  {showAlert && <Alert />}
+
+                  <TextField
+                     label="Título"
+                     multiline
+                     fullWidth
+                     maxRows={2}
+                     name="titleBlog"
+                     value={titleBlog}
+                     onChange={handleBlogInput}
+                     sx={{ mb: 2 }}
                   />
-                  <ButtonLimpiar onClick={clearValues} />
-               </Stack>
-            </Paper>
-         </Container>
-      </Box>
+
+                  <SelectSingle
+                     title="Categoría"
+                     name="category"
+                     value={category}
+                     changeValueInState={handleBlogInput}
+                     selectOptions={categoryOptions}
+                     fullWidth
+                     sx={{ mb: 2 }}
+                  />
+
+                  <Wrapper>
+                     <Editor
+                        initialValue={descBlog}
+                        setContent={handleBlogInput}
+                     />
+                  </Wrapper>
+
+                  <Stack
+                     direction={{ xs: 'column', sm: 'row' }}
+                     spacing={2}
+                     justifyContent="flex-end"
+                     alignItems="flex-end"
+                     sx={{ mt: 2 }}
+                  >
+                     <ButtonEnviar
+                        handleSubmit={handleSubmit}
+                        isLoading={isLoading}
+                     />
+                     <ButtonLimpiar onClick={clearValues} />
+                  </Stack>
+               </Paper>
+            </Container>
+         </Box>
+      </Container>
    );
 };
 
