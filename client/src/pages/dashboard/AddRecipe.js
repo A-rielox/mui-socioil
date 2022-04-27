@@ -74,10 +74,10 @@ const AddRecipe = () => {
          return;
       }
 
-      // if (isEditing) {
-      // editRecipe({ oilsList, problemsList });
-      // return;
-      // }
+      if (isEditing) {
+         editRecipe();
+         return;
+      }
 
       // lo manda a crear con los valores q tiene en el state
       createRecipe();

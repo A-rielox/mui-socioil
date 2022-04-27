@@ -45,7 +45,6 @@ const RecipesContainer = () => {
                   sm: '1fr',
                   md: 'repeat(2, 1fr)',
                },
-               // margin: { sm: '0 auto' },
                gap: 4,
             }}
          >
@@ -67,6 +66,7 @@ const Wrapper = styled.section`
    h2 {
       text-transform: none;
    }
+   /* 
    & > h5 {
       font-weight: 700;
    }
@@ -111,5 +111,5 @@ const Wrapper = styled.section`
          -webkit-box-shadow: 9px 9px 22px 13px rgba(0, 0, 0, 0.43);
          box-shadow: 9px 9px 22px 13px rgba(0, 0, 0, 0.43);
       }
-   }
+   } */
 `;

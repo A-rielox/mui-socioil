@@ -40,26 +40,27 @@ const ExpandMore = styled(props => {
    }),
 }));
 
-export default function RecipeReviewCard({
+export default function BlogMui({
    _id,
-   oilsList,
-   problemsList,
    title,
    desc,
+   category,
    createdAt,
    createdBy,
-   // openModal,
+   openModal,
    onHold,
+   styledNews,
 }) {
-   const { user, authFetch, setEditRecipe, deleteRecipe } = useAppContext();
-   const [recipeUser, setRecipeUser] = useState(null);
+   const { setEditBlog, deleteBlog, user, authFetch } = useAppContext();
+   const [blogUser, setBlogUser] = useState(null);
+
    useEffect(() => {
       const fetchUser = async () => {
          const {
             data: { queryUser },
          } = await authFetch.get(`/auth/getUser?userId=${createdBy}`);
 
-         setRecipeUser(queryUser);
+         setBlogUser(queryUser);
       };
 
       fetchUser();
@@ -71,20 +72,16 @@ export default function RecipeReviewCard({
       setExpanded(!expanded);
    };
 
-   // fecha a despegar
-   let date = moment(createdAt);
-   date = date.format('MMM, YYYY');
-
-   if (!recipeUser) {
+   if (!blogUser) {
       return <Loading center />;
    }
 
    // arreglo para class del color del nivel
-   let colorLevel = recipeUser.level.split(' ');
+   let colorLevel = blogUser.level.split(' ');
    colorLevel = colorLevel[colorLevel.length - 1];
 
    // arreglo del string del nivel
-   const newStr = recipeUser.level.split(' ');
+   const newStr = blogUser.level.split(' ');
    let levelToDisplay = [];
    for (let i = 0; i < 3; i++) {
       if (i === 0) {
@@ -99,8 +96,13 @@ export default function RecipeReviewCard({
          }
       }
    }
-
    levelToDisplay = levelToDisplay.join('');
+
+   // arreglo para nombre a desplegar red red pendiente cortar a 1er nombre red red
+
+   // fecha a despegar
+   let date = moment(createdAt);
+   date = date.format('MMM, YYYY');
 
    const cardHeaderStyles = {
       display: 'flex',
@@ -119,22 +121,27 @@ export default function RecipeReviewCard({
    return (
       <Card
          sx={{
-            maxWidth: 600,
+            maxWidth: 900,
             overflow: 'visible',
             marginTop: '50px',
             backgroundColor: 'var(--primary-50)',
             height: 'min-content',
             mx: { sm: 'auto' }, // xel grid 1 columna en sm
          }}
+         onClick={() => openModal(_id)}
+         // onClick={() => console.log('click click')}
       >
          <CardHeader
-            title={headerTitle({ oilsList, title })}
-            subheader={headerSubtitle(problemsList)}
+            title={title}
+            subheader={`# ${category}`}
             sx={cardHeaderStyles}
          />
 
          <CardContent>
-            <PrevParagraph desc={desc} />
+            <div
+               className="content-center"
+               dangerouslySetInnerHTML={{ __html: desc }}
+            ></div>
          </CardContent>
 
          <CardActions disableSpacing>
@@ -145,53 +152,14 @@ export default function RecipeReviewCard({
                alignItems="flex-end"
                sx={{ mt: 2, flexGrow: 1 }}
             >
-               <ButtonUser user={recipeUser.name} />
+               <ButtonUser user={blogUser.name} />
 
                <ButtonLevel
                   colorLevel={colorLevel}
                   levelToDisplay={levelToDisplay}
                />
             </Stack>
-
-            <ExpandMore
-               expand={expanded}
-               onClick={handleExpandClick}
-               aria-expanded={expanded}
-               aria-label="show more"
-            >
-               <ExpandMoreIcon />
-            </ExpandMore>
          </CardActions>
-
-         <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <CardContent>
-               <Typography variant="body1">{desc}</Typography>
-               {/* <p>{desc}</p> */}
-
-               {(user._id === createdBy || user.role === 'admin') && (
-                  <Stack
-                     direction="row"
-                     spacing={2}
-                     justifyContent={{ xs: 'center', sm: 'center' }}
-                     alignItems="flex-end"
-                     sx={{ mt: 2, flexGrow: 1 }}
-                  >
-                     <Box sx={{ width: { xs: '50%', sm: 'min-content' } }}>
-                        <Link
-                           to="/add-recipe"
-                           onClick={() => {
-                              setEditRecipe(_id);
-                           }}
-                        >
-                           <ButtonEdit />
-                        </Link>
-                     </Box>
-
-                     <ButtonDelete deleteRecipe={deleteRecipe} id={_id} />
-                  </Stack>
-               )}
-            </CardContent>
-         </Collapse>
       </Card>
    );
 }

@@ -8,6 +8,11 @@ import styled from 'styled-components';
 import { AnimatePresence } from 'framer-motion';
 import DisplayedBlog from './modal/DisplayedBlog';
 
+// MUI
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import BlogMui from './mui/BlogMui';
+
 const BlogsContainer = () => {
    const {
       getBlogs,
@@ -51,39 +56,50 @@ const BlogsContainer = () => {
    }
 
    return (
-      <Wrapper>
-         <h5>
-            {totalBlogs} blog{blogs.length > 1 && 's'} encontrado
-            {blogs.length > 1 && 's'}
-         </h5>
+      <Container sx={{ my: 2 }} maxWidth="lg">
+         <Wrapper>
+            <h5>
+               {totalBlogs} blog{blogs.length > 1 && 's'} encontrado
+               {blogs.length > 1 && 's'}
+            </h5>
 
-         <div className="recipes">
-            {blogs.map(blog => {
-               return <Blog key={blog._id} {...blog} openModal={open} />;
-            })}
-         </div>
+            <Box
+               sx={{
+                  display: 'grid',
+                  gridTemplateColumns: {
+                     sm: '1fr',
+                     // md: 'repeat(2, 1fr)',
+                  },
+                  gap: 4,
+               }}
+            >
+               {blogs.map(blog => {
+                  return <BlogMui key={blog._id} {...blog} openModal={open} />;
+               })}
+            </Box>
 
-         {numOfBlogPages > 1 && <PageBtnContainerBlogs />}
+            {numOfBlogPages > 1 && <PageBtnContainerBlogs />}
 
-         {/* ♏♏♏♏                      👇 */}
-         <AnimatePresence>
-            {modalOpen && blogOpened && (
-               // <ModalBlog <----------- QUITAR
-               //    modalOpen={modalOpen}
-               //    handleClose={close}
-               //    blogOpened={blogOpened}
-               // />
-               <>
-                  <DisplayedBlog
-                     {...blogOpened}
-                     modalOpen={modalOpen}
-                     handleClose={close}
-                  />
-                  {/* <button onClick={close}>Close</button> */}
-               </>
-            )}
-         </AnimatePresence>
-      </Wrapper>
+            {/* ♏♏♏♏                      👇 */}
+            <AnimatePresence>
+               {modalOpen && blogOpened && (
+                  // <ModalBlog <----------- QUITAR
+                  //    modalOpen={modalOpen}
+                  //    handleClose={close}
+                  //    blogOpened={blogOpened}
+                  // />
+                  <>
+                     <DisplayedBlog
+                        {...blogOpened}
+                        modalOpen={modalOpen}
+                        handleClose={close}
+                     />
+                     {/* <button onClick={close}>Close</button> */}
+                  </>
+               )}
+            </AnimatePresence>
+         </Wrapper>
+      </Container>
    );
 };
 

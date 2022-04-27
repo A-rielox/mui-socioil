@@ -341,18 +341,25 @@ const AppProvider = ({ children }) => {
       console.log(`editar receta con id: ${id}`);
    };
 
-   const editRecipe = async ({ oilsList, problemsList }) => {
+   const editRecipe = async () => {
       dispatch({ type: EDIT_RECIPE_BEGIN });
 
       try {
          // prettier-ignore
-         const {
-            title, desc, oil1, oil2, oil3, oil4, oil5, problem1, problem2, problem3
-         } = state;
+         // const {
+         //    title, desc, oil1, oil2, oil3, oil4, oil5, problem1, problem2, problem3
+         // } = state;
+         const { title, desc, problemsList, oilsList } = state;
 
          // prettier-ignore
+         // await authFetch.patch(`/recipes/${state.editRecipeId}`, {
+         //    oilsList, problemsList, title, desc, oil1, oil2, oil3, oil4, oil5, problem1, problem2, problem3,
+         // });
          await authFetch.patch(`/recipes/${state.editRecipeId}`, {
-            oilsList, problemsList, title, desc, oil1, oil2, oil3, oil4, oil5, problem1, problem2, problem3,
+            oilsList,
+            problemsList,
+            title,
+            desc,
          });
 
          dispatch({ type: EDIT_RECIPE_SUCCESS });
