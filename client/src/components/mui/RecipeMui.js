@@ -18,14 +18,25 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
 
 import { useEffect, useState } from 'react';
 import Loading from '../Loading';
 import { useAppContext } from '../../context/appContext';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 import headerTitle from './recipe/headerTitle';
 import headerSubtitle from './recipe/headerSubtitle';
+
+import {
+   ButtonUser,
+   ButtonLevel,
+   ButtonEdit,
+   ButtonDelete,
+} from './ButtonsUser';
+import Button from '@mui/material/Button';
 
 const ExpandMore = styled(props => {
    const { expand, ...other } = props;
@@ -49,7 +60,7 @@ export default function RecipeReviewCard({
    openModal,
    onHold,
 }) {
-   const { user, authFetch } = useAppContext();
+   const { user, authFetch, setEditRecipe, deleteRecipe } = useAppContext();
    const [recipeUser, setRecipeUser] = useState(null);
    useEffect(() => {
       const fetchUser = async () => {
@@ -77,6 +88,28 @@ export default function RecipeReviewCard({
       return <Loading center />;
    }
 
+   // arreglo para class del color del nivel
+   let colorLevel = recipeUser.level.split(' ');
+   colorLevel = colorLevel[colorLevel.length - 1];
+
+   // arreglo del string del nivel
+   const newStr = recipeUser.level.split(' ');
+   let levelToDisplay = [];
+   for (let i = 0; i < 3; i++) {
+      if (i === 0) {
+         levelToDisplay.push(newStr[i]);
+      } else if (i === 1) {
+         if (newStr[i]) {
+            levelToDisplay.push(` ${newStr[i][0]}.`);
+         }
+      } else if (i === 2) {
+         if (newStr[i]) {
+            levelToDisplay.push(` ${newStr[i][0]}.`);
+         }
+      }
+   }
+   levelToDisplay = levelToDisplay.join('');
+
    const cardHeaderStyles = {
       display: 'flex',
       flexDirection: 'column',
@@ -103,16 +136,10 @@ export default function RecipeReviewCard({
          }}
       >
          <CardHeader
-            avatar={
-               <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                  R
-               </Avatar>
-            }
             // title={recipeUser.name}
-            title={headerTitle(oilsList)}
+            title={headerTitle({ oilsList, title })}
             // subheader={date}
             subheader={headerSubtitle(problemsList)}
-            // alt={title}
             sx={cardHeaderStyles}
          />
 
@@ -125,14 +152,28 @@ export default function RecipeReviewCard({
          </CardContent>
 
          <CardActions disableSpacing>
-            <Checkbox
-               /* {...label} */ icon={<FavoriteBorder />}
+            {/* <Checkbox
+               icon={<FavoriteBorder />}
                checkedIcon={<Favorite sx={{ color: 'red' }} />}
             />
 
             <IconButton aria-label="share">
                <ShareIcon />
-            </IconButton>
+            </IconButton> */}
+            <Stack
+               direction={{ xs: 'column', sm: 'row' }}
+               spacing={2}
+               justifyContent="flex-start"
+               alignItems="flex-end"
+               sx={{ mt: 2, flexGrow: 1 }}
+            >
+               <ButtonUser user={recipeUser.name} />
+
+               <ButtonLevel
+                  colorLevel={colorLevel}
+                  levelToDisplay={levelToDisplay}
+               />
+            </Stack>
 
             <ExpandMore
                expand={expanded}
@@ -146,11 +187,34 @@ export default function RecipeReviewCard({
 
          <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
-               <Typography paragraph>Method:</Typography>
                <Typography paragraph>
                   Heat 1/2 cup of the broth in a pot until simmering, add
                   saffron and set aside for 10 minutes.
                </Typography>
+
+               {(user._id === createdBy || user.role === 'admin') && (
+                  <Stack
+                     // direction={{ xs: 'column', sm: 'row' }}
+                     direction="row"
+                     spacing={2}
+                     justifyContent={{ xs: 'center', sm: 'center' }}
+                     alignItems="flex-end"
+                     sx={{ mt: 2, flexGrow: 1 }}
+                  >
+                     <Box sx={{ width: { xs: '50%', sm: 'min-content' } }}>
+                        <Link
+                           to="/add-recipe"
+                           onClick={() => {
+                              setEditRecipe(_id);
+                           }}
+                        >
+                           <ButtonEdit />
+                        </Link>
+                     </Box>
+
+                     <ButtonDelete deleteRecipe={deleteRecipe} id={_id} />
+                  </Stack>
+               )}
             </CardContent>
          </Collapse>
       </Card>

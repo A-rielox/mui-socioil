@@ -2,11 +2,7 @@ import { useAppContext } from '../context/appContext';
 import Loading from './Loading';
 import { useEffect, useState } from 'react';
 import PageBtnContainer from './PageBtnContainer';
-import Recipe from './Recipe';
 import styled from 'styled-components';
-
-import { AnimatePresence } from 'framer-motion';
-import DisplayedRecipe from './modal/DisplayedRecipe';
 
 // MUI
 import RecipeMui from './mui/RecipeMui';
@@ -18,18 +14,6 @@ const RecipesContainer = () => {
    const {
       getRecipes, recipes, isLoading, page, totalRecipes, search, searchOil,
       searchProblem, sort, numOfPages } = useAppContext();
-
-   // ♏♏♏♏
-   const [modalOpen, setModalOpen] = useState(false);
-   const [recipeOpened, setRecipeOpened] = useState('');
-   const close = () => setModalOpen(false);
-   const open = recipeId => {
-      setModalOpen(true);
-
-      const recipeSelected = recipes.filter(recipe => recipe._id === recipeId);
-
-      setRecipeOpened(recipeSelected[0]);
-   };
 
    useEffect(() => {
       getRecipes(/* { onHold: false } */);
@@ -48,7 +32,7 @@ const RecipesContainer = () => {
    }
 
    return (
-      <Container sx={{ mt: 2 }} maxWidth="lg">
+      <Container sx={{ my: 2 }} maxWidth="lg">
          <h5>
             {totalRecipes} receta{recipes.length > 1 && 's'} encontrada
             {recipes.length > 1 && 's'}
@@ -66,29 +50,11 @@ const RecipesContainer = () => {
             }}
          >
             {recipes.map(recipe => {
-               return (
-                  <RecipeMui key={recipe._id} {...recipe} openModal={open} />
-               );
+               return <RecipeMui key={recipe._id} {...recipe} />;
             })}
          </Box>
 
          {numOfPages > 1 && <PageBtnContainer />}
-
-         {/* ♏♏♏♏                      👇 */}
-         <AnimatePresence>
-            {modalOpen && recipeOpened && (
-               // <Modal <----------- QUITAR
-               //    modalOpen={modalOpen}
-               //    handleClose={close}
-               //    recipeOpened={recipeOpened}
-               // />
-               <DisplayedRecipe
-                  {...recipeOpened}
-                  modalOpen={modalOpen}
-                  handleClose={close}
-               />
-            )}
-         </AnimatePresence>
       </Container>
    );
 };

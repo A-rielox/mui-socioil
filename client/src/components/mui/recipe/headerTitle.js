@@ -8,6 +8,9 @@ import ListItemText from '@mui/material/ListItemText';
 
 import InvertColorsIcon from '@mui/icons-material/InvertColors';
 
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+
 const buttonStyle = {
    py: '0',
    '& .MuiListItemIcon-root': {
@@ -26,10 +29,21 @@ const buttonStyle = {
    },
 };
 
-const headerTitle = oilsList => {
+const headerTitle = ({ oilsList, title }) => {
    return (
       <Box>
-         <List sx={{ display: 'flex', justifyContent: 'center', py: 0 }}>
+         <Typography variant="h5">{title}</Typography>
+
+         <Divider sx={{ bgcolor: 'white' }} />
+
+         <List
+            sx={{
+               display: 'flex',
+               justifyContent: 'center',
+               py: 0,
+               flexWrap: 'wrap',
+            }}
+         >
             {oilsList.map((oil, index) => {
                return (
                   <ListItem key={index} disablePadding sx={{ width: 'auto' }}>

@@ -270,8 +270,10 @@ const reducer = (state, action) => {
          _id,title,desc,oilsList,oil1,oil2,oil3,oil4,oil5,problemsList,problem1,problem2,problem3,
       } = recipe;
 
+      const editingMolestias = problemsList.join(', ');
+
       // prettier-ignore
-      return { ...state, isEditing: true, editRecipeId: _id, title, desc, oilsList, oil1, oil2, oil3, oil4, oil5, problemsList, problem1, problem2, problem3 };
+      return { ...state, isEditing: true, editRecipeId: _id, title, desc, oilsList,  oil1, oil2, oil3, oil4, oil5, problemsList, problem1, problem2, problem3, molestias: editingMolestias };
    }
    //
    if (action.type === DELETE_RECIPE_BEGIN) {

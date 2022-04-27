@@ -35,7 +35,7 @@ function getStyles(name, selectOption, theme) {
 
 export default function MultipleSelectChip({ changeStateValues, initValue }) {
    const theme = useTheme();
-   const [selectOption, setSelectOption] = useState([]);
+   const [selectOption, setSelectOption] = useState(initValue);
 
    useEffect(() => {
       changeStateValues({ name: 'oilsList', value: selectOption });
