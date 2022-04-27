@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useAppContext } from '../context/appContext';
 import Loading from './Loading';
 import PageBtnContainerBlogs from './PageBtnContainerBlogs';
-import Blog from './Blog';
 import styled from 'styled-components';
 
 import { AnimatePresence } from 'framer-motion';
@@ -55,50 +54,59 @@ const BlogsContainer = () => {
       );
    }
 
+   const containerStyles = {
+      my: 2,
+      '& .backdrop': {
+         position: 'fixed',
+         top: 0,
+         bottom: 0,
+         left: 0,
+         right: 0,
+         height: '100vh',
+         width: '100%',
+         background: '#0000008a',
+         display: 'flex',
+         alignItems: 'center',
+         justifyContent: 'center',
+         zIndex: '100',
+      },
+   };
+
    return (
-      <Container sx={{ my: 2 }} maxWidth="lg">
-         <Wrapper>
-            <h5>
-               {totalBlogs} blog{blogs.length > 1 && 's'} encontrado
-               {blogs.length > 1 && 's'}
-            </h5>
+      <Container sx={containerStyles} maxWidth="lg">
+         <h5>
+            {totalBlogs} blog{blogs.length > 1 && 's'} encontrado
+            {blogs.length > 1 && 's'}
+         </h5>
 
-            <Box
-               sx={{
-                  display: 'grid',
-                  gridTemplateColumns: {
-                     sm: '1fr',
-                     // md: 'repeat(2, 1fr)',
-                  },
-                  gap: 4,
-               }}
-            >
-               {blogs.map(blog => {
-                  return <BlogMui key={blog._id} {...blog} openModal={open} />;
-               })}
-            </Box>
+         <Box
+            sx={{
+               display: 'grid',
+               gridTemplateColumns: {
+                  sm: '1fr',
+               },
+               gap: 4,
+            }}
+         >
+            {blogs.map(blog => {
+               return <BlogMui key={blog._id} {...blog} openModal={open} />;
+            })}
+         </Box>
 
-            {numOfBlogPages > 1 && <PageBtnContainerBlogs />}
+         {numOfBlogPages > 1 && <PageBtnContainerBlogs />}
 
-            {/* ♏♏♏♏                      👇 */}
-            <AnimatePresence>
-               {modalOpen && blogOpened && (
-                  // <ModalBlog <----------- QUITAR
-                  //    modalOpen={modalOpen}
-                  //    handleClose={close}
-                  //    blogOpened={blogOpened}
-                  // />
-                  <>
-                     <DisplayedBlog
-                        {...blogOpened}
-                        modalOpen={modalOpen}
-                        handleClose={close}
-                     />
-                     {/* <button onClick={close}>Close</button> */}
-                  </>
-               )}
-            </AnimatePresence>
-         </Wrapper>
+         {/* ♏♏♏♏                      👇 */}
+         <AnimatePresence>
+            {modalOpen && blogOpened && (
+               <>
+                  <DisplayedBlog
+                     {...blogOpened}
+                     modalOpen={modalOpen}
+                     handleClose={close}
+                  />
+               </>
+            )}
+         </AnimatePresence>
       </Container>
    );
 };
@@ -110,34 +118,5 @@ const Wrapper = styled.section`
 
    h2 {
       text-transform: none;
-   }
-   & > h5 {
-      font-weight: 700;
-   }
-   .recipes {
-      display: grid;
-      grid-template-columns: 1fr;
-      row-gap: 2rem;
-   }
-   @media (min-width: 992px) {
-      .recipes {
-         display: grid;
-         grid-template-columns: 1fr 1fr;
-         gap: 1rem;
-      }
-   }
-
-   .backdrop {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      width: 100%;
-      background: #0000008a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      z-index: 100;
    }
 `;

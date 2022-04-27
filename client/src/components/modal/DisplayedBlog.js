@@ -305,6 +305,10 @@ const Wrapper = styled.article`
    max-height: 90vh;
    max-width: 95vw;
    overflow-y: scroll;
+   /*  */
+
+   margin-top: 6rem;
+   margin-bottom: 2rem;
 
    .content {
       padding: 1rem 1.5rem;

@@ -140,7 +140,12 @@ export default function MiniDrawer() {
             </Toolbar>
          </AppBar>
 
-         <Drawer variant="permanent" open={showSidebar}>
+         <Drawer
+            variant="permanent"
+            open={
+               showSidebar
+            } /* sx={{ display: { xs: 'none', sm: 'block' } }} */
+         >
             <DrawerHeader>
                <IconButton onClick={handleDrawerClose}>
                   {theme.direction === 'rtl' ? (

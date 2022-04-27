@@ -1,13 +1,9 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
@@ -16,11 +12,8 @@ import { useEffect, useState } from 'react';
 import Loading from '../Loading';
 import { useAppContext } from '../../context/appContext';
 import moment from 'moment';
-import { Link } from 'react-router-dom';
 
-import headerTitle from './recipe/headerTitle';
-import headerSubtitle from './recipe/headerSubtitle';
-import PrevParagraph from './PrevParagraph';
+import styled from 'styled-components';
 
 import {
    ButtonUser,
@@ -28,17 +21,6 @@ import {
    ButtonEdit,
    ButtonDelete,
 } from './ButtonsUser';
-
-const ExpandMore = styled(props => {
-   const { expand, ...other } = props;
-   return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-   marginLeft: 'auto',
-   transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-   }),
-}));
 
 export default function BlogMui({
    _id,
@@ -65,12 +47,6 @@ export default function BlogMui({
 
       fetchUser();
    }, [_id]);
-
-   const [expanded, setExpanded] = useState(false);
-
-   const handleExpandClick = () => {
-      setExpanded(!expanded);
-   };
 
    if (!blogUser) {
       return <Loading center />;
@@ -129,7 +105,6 @@ export default function BlogMui({
             mx: { sm: 'auto' }, // xel grid 1 columna en sm
          }}
          onClick={() => openModal(_id)}
-         // onClick={() => console.log('click click')}
       >
          <CardHeader
             title={title}
@@ -138,10 +113,12 @@ export default function BlogMui({
          />
 
          <CardContent>
-            <div
-               className="content-center"
-               dangerouslySetInnerHTML={{ __html: desc }}
-            ></div>
+            <ContentWrapper>
+               <div
+                  className="content-center"
+                  dangerouslySetInnerHTML={{ __html: desc }}
+               ></div>
+            </ContentWrapper>
          </CardContent>
 
          <CardActions disableSpacing>
@@ -150,7 +127,7 @@ export default function BlogMui({
                spacing={2}
                justifyContent="flex-start"
                alignItems="flex-end"
-               sx={{ mt: 2, flexGrow: 1 }}
+               sx={{ m: 2, flexGrow: 1 }}
             >
                <ButtonUser user={blogUser.name} />
 
@@ -163,3 +140,25 @@ export default function BlogMui({
       </Card>
    );
 }
+
+const ContentWrapper = styled.div`
+   padding: 2rem;
+   .content-center {
+      max-height: 700px;
+      overflow: hidden;
+
+      p {
+         margin-bottom: 0.5rem;
+         max-width: 40em;
+         color: #6e7785;
+      }
+
+      ul {
+         list-style-type: disc;
+         margin-top: 0;
+         padding-top: 0;
+         padding-bottom: 0.5rem;
+         padding-left: 2rem;
+      }
+   }
+`;
