@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import CleaningServicesIcon from '@mui/icons-material/CleaningServices';
 
-export const ButtonEnviar = ({ handleSubmit, isLoading }) => {
+export const ButtonEnviar = ({ handleSubmit, isLoading, clearValues }) => {
    return (
       <Button
          variant="contained"
@@ -17,7 +17,10 @@ export const ButtonEnviar = ({ handleSubmit, isLoading }) => {
                color: 'var(--primary-700)',
             },
          }}
-         onClick={handleSubmit}
+         onClick={e => {
+            handleSubmit(e);
+            clearValues();
+         }}
       >
          enviar
       </Button>
