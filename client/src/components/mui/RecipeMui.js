@@ -73,26 +73,6 @@ export default function RecipeReviewCard({
       return <Loading center />;
    }
 
-   // const headerTitle = () => {
-   //    return (
-   //       <ul className="ulListOil">
-   //          {oilsList.map((oil, index) => {
-   //             return <li key={index}>{oil}</li>;
-   //          })}
-   //       </ul>
-   //    );
-   // };
-
-   // const headerSubtitle = () => {
-   //    return (
-   //       <ul className="ulListProblem">
-   //          {problemsList.map((problem, index) => {
-   //             return <li key={index}>{problem}</li>;
-   //          })}
-   //       </ul>
-   //    );
-   // };
-
    const cardHeaderStyles = {
       display: 'flex',
       flexDirection: 'column',
@@ -115,6 +95,7 @@ export default function RecipeReviewCard({
             marginTop: '50px',
             backgroundColor: 'var(--primary-50)',
             height: 'min-content',
+            mx: { sm: 'auto' }, // xel grid 1 columna en sm
          }}
       >
          <CardHeader

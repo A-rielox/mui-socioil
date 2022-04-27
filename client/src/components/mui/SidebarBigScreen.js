@@ -22,7 +22,7 @@ import { useAppContext } from '../../context/appContext';
 import Logo from '../Logo';
 import NavbarAvatar from './NavbarAvatar';
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const openedMixin = theme => ({
    width: drawerWidth,

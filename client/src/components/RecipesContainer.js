@@ -10,6 +10,8 @@ import DisplayedRecipe from './modal/DisplayedRecipe';
 
 // MUI
 import RecipeMui from './mui/RecipeMui';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 
 const RecipesContainer = () => {
    // prettier-ignore
@@ -46,19 +48,29 @@ const RecipesContainer = () => {
    }
 
    return (
-      <Wrapper>
+      <Container sx={{ mt: 2 }} maxWidth="lg">
          <h5>
             {totalRecipes} receta{recipes.length > 1 && 's'} encontrada
             {recipes.length > 1 && 's'}
          </h5>
 
-         <div className="recipes">
+         <Box
+            sx={{
+               display: 'grid',
+               gridTemplateColumns: {
+                  sm: '1fr',
+                  md: 'repeat(2, 1fr)',
+               },
+               // margin: { sm: '0 auto' },
+               gap: 4,
+            }}
+         >
             {recipes.map(recipe => {
                return (
                   <RecipeMui key={recipe._id} {...recipe} openModal={open} />
                );
             })}
-         </div>
+         </Box>
 
          {numOfPages > 1 && <PageBtnContainer />}
 
@@ -77,7 +89,7 @@ const RecipesContainer = () => {
                />
             )}
          </AnimatePresence>
-      </Wrapper>
+      </Container>
    );
 };
 
@@ -85,6 +97,7 @@ export default RecipesContainer;
 
 const Wrapper = styled.section`
    margin-top: 4rem;
+
    h2 {
       text-transform: none;
    }

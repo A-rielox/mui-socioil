@@ -4,26 +4,19 @@ import styled from 'styled-components';
 import { SidebarSmallScreen, SidebarBigScreen, Navbar } from '../../components';
 
 import SidebarBigMui from '../../components/mui/SidebarBigScreen';
+import Box from '@mui/material/Box';
 
 const SharedLayout = () => {
    const { user } = useAppContext();
 
    return (
-      <Wrapper>
-         <main className="dashboard">
-            <SidebarSmallScreen />
-            {/* <SidebarBigScreen /> */}
-            <SidebarBigMui />
+      <Box sx={{ display: 'flex' }}>
+         <SidebarBigMui />
 
-            {/* <div> */}
-            {/* <Navbar /> */}
-
-            <div className="dashboard-page">
-               <Outlet />
-            </div>
-            {/* </div> */}
-         </main>
-      </Wrapper>
+         <Box sx={{ flexGrow: 1, mt: 8 }}>
+            <Outlet />
+         </Box>
+      </Box>
    );
 };
 // el <Outlet /> es para q se rendericen las pags nesteadas
