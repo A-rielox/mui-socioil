@@ -5,8 +5,9 @@ import PageBtnContainerBlogs from '../../components/PageBtnContainerBlogs';
 import Blog from '../../components/Blog';
 import styled from 'styled-components';
 
-import { AnimatePresence } from 'framer-motion';
-import DisplayedBlog from '../../components/modal/DisplayedBlog';
+import New from '../../components/mui/News';
+import NewsModal from '../../components/mui/NewsModal';
+import Container from '@mui/material/Container';
 
 const Stats = () => {
    const {
@@ -43,58 +44,61 @@ const Stats = () => {
    }
 
    if (blogs.length === 0) {
-      return (
-         <Wrapper>
-            <h2>No tenemos noticias 📰 ...</h2>
-         </Wrapper>
-      );
+      return <NoEncontramos>No tenemos noticias 📰 ...</NoEncontramos>;
    }
 
+   const containerStyles = {
+      my: 2,
+      '& .backdrop': {
+         position: 'fixed',
+         top: 0,
+         bottom: 0,
+         left: 0,
+         right: 0,
+         height: '100vh',
+         width: '100%',
+         background: '#0000008a',
+         display: 'flex',
+         alignItems: 'center',
+         justifyContent: 'center',
+         zIndex: '100',
+      },
+   };
+
    return (
-      <Wrapper>
+      <Container sx={containerStyles} maxWidth="lg">
          <h5>
-            tenemos {totalBlogs} noticia{blogs.length > 1 && 's'}{' '}
-            {/* encontrada
-            {blogs.length > 1 && 's'} */}
+            tenemos {totalBlogs} noticia{blogs.length > 1 && 's'}
          </h5>
 
          <div className="recipes">
             {blogs.map(blog => {
-               return (
-                  <Blog
-                     styledNews={true}
-                     key={blog._id}
-                     {...blog}
-                     openModal={open}
-                  />
-               );
+               return <New key={blog._id} {...blog} openModal={open} />;
             })}
          </div>
 
          {numOfBlogPages > 1 && <PageBtnContainerBlogs />}
 
-         {/* ♏♏♏♏                      👇 */}
-         <AnimatePresence>
-            {modalOpen && blogOpened && (
-               // <ModalBlog <----------- QUITAR
-               //    modalOpen={modalOpen}
-               //    handleClose={close}
-               //    blogOpened={blogOpened}
-               // />
-               <>
-                  <DisplayedBlog
-                     {...blogOpened}
-                     modalOpen={modalOpen}
-                     handleClose={close}
-                  />
-               </>
-            )}
-         </AnimatePresence>
-      </Wrapper>
+         {modalOpen && blogOpened && (
+            <>
+               <NewsModal
+                  {...blogOpened}
+                  modalOpen={modalOpen}
+                  handleClose={close}
+               />
+            </>
+         )}
+      </Container>
    );
 };
 
 export default Stats;
+
+const NoEncontramos = styled.h2`
+   text-align: center;
+   margin-top: 4rem;
+   text-transform: none;
+`;
 
 const Wrapper = styled.section`
    margin-top: 4rem;

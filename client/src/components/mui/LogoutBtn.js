@@ -18,7 +18,6 @@ export default function BasicMenu() {
    };
    const handleClose = () => {
       setAnchorEl(null);
-      logoutUser();
    };
 
    const menuStyles = {
@@ -44,8 +43,6 @@ export default function BasicMenu() {
             aria-expanded={open ? 'true' : undefined}
             onClick={handleClick}
             sx={{
-               width: { xs: '100%', sm: '25%' },
-               // bgcolor: 'var(--primary-500)',
                color: 'var(--primary-700)',
                '&:hover': {
                   bgcolor: 'var(--primary-100)',
@@ -65,7 +62,14 @@ export default function BasicMenu() {
             }}
             sx={menuStyles}
          >
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
+            <MenuItem
+               onClick={() => {
+                  handleClose();
+                  logoutUser();
+               }}
+            >
+               👋 Salir
+            </MenuItem>
          </Menu>
       </div>
    );

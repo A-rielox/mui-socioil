@@ -144,6 +144,7 @@ const AddBlog = () => {
                      <ButtonEnviar
                         handleSubmit={handleSubmit}
                         isLoading={isLoading}
+                        clearValues={clearValues}
                      />
                      <ButtonLimpiar onClick={clearValues} />
                   </Stack>
