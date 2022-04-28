@@ -20,7 +20,7 @@ import links from '../../utils/links';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useAppContext } from '../../context/appContext';
 import Logo from '../Logo';
-import NavbarAvatar from './NavbarAvatar';
+import LogoutBtn from './LogoutBtn';
 
 const drawerWidth = 200;
 
@@ -105,8 +105,13 @@ export default function MiniDrawer() {
       toggleSidebar({ value: false });
    };
 
+   const sxSidebar = {
+      display: 'flex',
+   };
+
    return (
-      <Box sx={{ display: 'flex' }}>
+      // <Box sx={{ display: 'flex' }}>
+      <Box sx={sxSidebar}>
          <AppBar position="fixed" open={showSidebar}>
             <Toolbar sx={{ backgroundColor: 'var(--primary-50)' }}>
                <Box
@@ -135,17 +140,14 @@ export default function MiniDrawer() {
                      <Logo />
                   </Box>
 
-                  <NavbarAvatar />
+                  {/* <NavbarAvatar /> */}
+                  <LogoutBtn />
                </Box>
             </Toolbar>
          </AppBar>
 
-         <Drawer
-            variant="permanent"
-            open={
-               showSidebar
-            } /* sx={{ display: { xs: 'none', sm: 'block' } }} */
-         >
+         {/* sx={{ display: { xs: 'none', sm: 'block' } }} */}
+         <Drawer variant="permanent" open={showSidebar}>
             <DrawerHeader>
                <IconButton onClick={handleDrawerClose}>
                   {theme.direction === 'rtl' ? (

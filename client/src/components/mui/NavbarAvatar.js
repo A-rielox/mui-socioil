@@ -24,7 +24,10 @@ const NavbarAvatar = () => {
       <Box sx={{ flexGrow: 0 }}>
          <Tooltip title="Log out">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-               <Avatar alt="Remy Sharp" src="" sx={{ width: 56, height: 56 }} />
+               <Avatar
+                  alt="Remy Sharp"
+                  src="" /* sx={{ width: 56, height: 56 }} */
+               />
             </IconButton>
          </Tooltip>
 

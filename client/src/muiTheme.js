@@ -103,4 +103,14 @@ export const dashboardTheme = createTheme({
          },
       },
    },
+   breakpoints: {
+      values: {
+         xs: 0,
+         sm: 600,
+         eighthundred: 800,
+         md: 900,
+         lg: 1200,
+         xl: 1536,
+      },
+   },
 });
