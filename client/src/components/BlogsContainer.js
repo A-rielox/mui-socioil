@@ -12,6 +12,8 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import BlogMui from './mui/BlogMui';
 
+import ModalBlogMui from './mui/ModalBlogMui';
+
 const BlogsContainer = () => {
    const {
       getBlogs,
@@ -96,7 +98,7 @@ const BlogsContainer = () => {
          {numOfBlogPages > 1 && <PageBtnContainerBlogs />}
 
          {/* ♏♏♏♏                      👇 */}
-         <AnimatePresence>
+         {/* <AnimatePresence>
             {modalOpen && blogOpened && (
                <>
                   <DisplayedBlog
@@ -106,7 +108,17 @@ const BlogsContainer = () => {
                   />
                </>
             )}
-         </AnimatePresence>
+         </AnimatePresence> */}
+
+         {modalOpen && blogOpened && (
+            <>
+               <ModalBlogMui
+                  {...blogOpened}
+                  modalOpen={modalOpen}
+                  handleClose={close}
+               />
+            </>
+         )}
       </Container>
    );
 };
