@@ -20,13 +20,13 @@ export default function MyFab() {
       position: 'absolute',
       top: 2,
       right: 2,
-      // '&.MuiSpeedDial-directionDown': {
-      //    top: 'theme.spacing(2)',
-      //    left: 'theme.spacing(2)',
-      // },
       '& .MuiSpeedDial-fab': {
          color: 'var(--primary-700)',
          backgroundColor: 'var(--primary-50)',
+         '&:hover': {
+            backgroundColor: 'var(--primary-700)',
+            color: 'var(--primary-50)',
+         },
       },
       '& .MuiSpeedDialAction-staticTooltipLabel': {
          color: 'var(--primary-700)',
@@ -37,6 +37,10 @@ export default function MyFab() {
          color: 'var(--primary-700)',
          fontSize: '1.5rem',
          backgroundColor: 'var(--primary-50)',
+         '&:hover': {
+            backgroundColor: 'var(--primary-700)',
+            color: 'var(--primary-50)',
+         },
       },
    };
 

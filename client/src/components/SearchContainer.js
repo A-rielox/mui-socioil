@@ -38,17 +38,16 @@ const SearchContainer = () => {
       clearFilters();
    };
 
+   const paperStyles = {
+      borderRadius: 'var(--borderRadius)',
+      width: '100%',
+      padding: '3rem 2rem 4rem',
+      boxShadow: 'var(--shadow-2)',
+   };
+
    return (
       <Container sx={{ mt: 2 }} maxWidth="lg">
-         <Paper
-            sx={{
-               borderRadius: 'var(--borderRadius)',
-               width: '100%',
-
-               padding: '3rem 2rem 4rem',
-               boxShadow: 'var(--shadow-2)',
-            }}
-         >
+         <Paper sx={paperStyles}>
             <Container maxWidth="md">
                <h4>Búsqueda</h4>
 

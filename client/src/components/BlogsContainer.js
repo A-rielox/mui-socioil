@@ -4,9 +4,6 @@ import Loading from './Loading';
 import PageBtnContainerBlogs from './PageBtnContainerBlogs';
 import styled from 'styled-components';
 
-import { AnimatePresence } from 'framer-motion';
-import DisplayedBlog from './modal/DisplayedBlog';
-
 // MUI
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -49,11 +46,7 @@ const BlogsContainer = () => {
    }
 
    if (blogs.length === 0) {
-      return (
-         <Wrapper>
-            <h2>No encontramos blogs 😳 ...</h2>
-         </Wrapper>
-      );
+      return <NoEncontramos>No encontramos blogs 😳 ...</NoEncontramos>;
    }
 
    const containerStyles = {
@@ -97,19 +90,6 @@ const BlogsContainer = () => {
 
          {numOfBlogPages > 1 && <PageBtnContainerBlogs />}
 
-         {/* ♏♏♏♏                      👇 */}
-         {/* <AnimatePresence>
-            {modalOpen && blogOpened && (
-               <>
-                  <DisplayedBlog
-                     {...blogOpened}
-                     modalOpen={modalOpen}
-                     handleClose={close}
-                  />
-               </>
-            )}
-         </AnimatePresence> */}
-
          {modalOpen && blogOpened && (
             <>
                <ModalBlogMui
@@ -125,10 +105,8 @@ const BlogsContainer = () => {
 
 export default BlogsContainer;
 
-const Wrapper = styled.section`
+const NoEncontramos = styled.h2`
+   text-align: center;
    margin-top: 4rem;
-
-   h2 {
-      text-transform: none;
-   }
+   text-transform: none;
 `;

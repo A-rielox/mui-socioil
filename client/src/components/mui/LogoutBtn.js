@@ -1,127 +1,72 @@
-import { FaUserCircle, FaCaretDown } from 'react-icons/fa';
-import { useState } from 'react';
-import { useAppContext } from '../../context/appContext';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
-const LogoutBtn = () => {
+import PersonIcon from '@mui/icons-material/Person';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+
+import { useAppContext } from '../../context/appContext';
+
+export default function BasicMenu() {
    const { logoutUser, user } = useAppContext();
-   const [showLogout, setShowLogout] = useState(false);
+
+   const [anchorEl, setAnchorEl] = React.useState(null);
+   const open = Boolean(anchorEl);
+   const handleClick = event => {
+      setAnchorEl(event.currentTarget);
+   };
+   const handleClose = () => {
+      setAnchorEl(null);
+      logoutUser();
+   };
+
+   const menuStyles = {
+      '& .MuiMenu-list': {
+         backgroundColor: 'var(--primary-50)',
+         color: 'var(--primary-700)',
+         '&:hover': {
+            bgcolor: 'var(--primary-100)',
+            color: 'var(--primary-700)',
+         },
+      },
+   };
 
    return (
-      <Wrapper>
-         <div
-            className="btn-container"
-            onMouseEnter={() => setShowLogout(true)}
-            onMouseLeave={() => setShowLogout(false)}
+      <div>
+         <Button
+            // variant="contained"
+            startIcon={<PersonIcon />}
+            endIcon={<ArrowDropDownIcon />}
+            id="basic-button"
+            aria-controls={open ? 'basic-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+            onClick={handleClick}
+            sx={{
+               width: { xs: '100%', sm: '25%' },
+               // bgcolor: 'var(--primary-500)',
+               color: 'var(--primary-700)',
+               '&:hover': {
+                  bgcolor: 'var(--primary-100)',
+                  color: 'var(--primary-700)',
+               },
+            }}
          >
-            <motion.div
-               whileHover={{ scale: 1.1 }}
-               whileTap={{ scale: 1.05 }}
-               transition={{
-                  type: 'spring',
-                  stiffness: 950,
-                  ease: 'easeInOut',
-               }}
-            >
-               <button
-                  className="btn"
-                  // onClick={() => setShowLogout(!showLogout)}
-               >
-                  <FaUserCircle />
-                  {user?.name}
-                  <FaCaretDown />
-               </button>
-            </motion.div>
-
-            <motion.div
-               whileHover={{ scale: 1.1 }}
-               whileTap={{ scale: 1.05 }}
-               transition={{
-                  type: 'spring',
-                  stiffness: 950,
-                  ease: 'easeInOut',
-               }}
-               className={`dropdown ${showLogout ? 'show-dropdown' : null} `}
-            >
-               <button
-                  onClick={logoutUser}
-                  type="button"
-                  className="dropdown-btn"
-               >
-                  logout
-               </button>
-            </motion.div>
-         </div>
-      </Wrapper>
+            {user?.name}
+         </Button>
+         <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+               'aria-labelledby': 'basic-button',
+            }}
+            sx={menuStyles}
+         >
+            <MenuItem onClick={handleClose}>Logout</MenuItem>
+         </Menu>
+      </div>
    );
-};
-
-export default LogoutBtn;
-
-const Wrapper = styled.nav`
-   /* background: var(--white); */
-
-   .btn-container {
-      position: relative;
-      padding-bottom: 7px;
-      padding-top: 7px;
-   }
-   .btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0 0.5rem;
-      position: relative;
-      box-shadow: var(--shadow-2);
-   }
-
-   .dropdown {
-      position: absolute;
-      margin-top: 10;
-      top: 43px;
-      left: 0;
-      width: 100%;
-      /* background: red; */
-      background: var(--primary-100);
-      box-shadow: var(--shadow-2);
-      padding: 0.5rem;
-      text-align: center;
-      border-radius: var(--borderRadius);
-      visibility: hidden;
-   }
-
-   .dropdown:hover {
-      background-color: var(--primary-500);
-      color: var(--white);
-   }
-   .dropdown:hover .dropdown-btn {
-      color: var(--white);
-   }
-
-   .dropdown::before {
-      content: '';
-      display: block;
-      width: 0;
-      height: 0;
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
-      border-bottom: 5px solid var(--primary-100);
-      position: absolute;
-      top: -5px;
-      left: 50%;
-      transform: translateX(-50%);
-   }
-
-   .show-dropdown {
-      visibility: visible;
-   }
-   .dropdown-btn {
-      background: transparent;
-      border-color: transparent;
-      color: var(--primary-500);
-      letter-spacing: var(--letterSpacing);
-      text-transform: capitalize;
-      cursor: pointer;
-   }
-`;
+}
