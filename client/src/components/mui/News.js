@@ -9,13 +9,20 @@ import moment from 'moment';
 import RecipeInfo from '../RecipeInfo';
 import styled from 'styled-components';
 
+// MUI
+
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import { ButtonEdit, ButtonDelete } from './ButtonsUser';
+
 const News = ({
    _id,
    title,
    desc,
    createdAt,
    createdBy,
-   handleClose,
+   // handleClose,
 
    openModal,
 }) => {
@@ -32,84 +39,98 @@ const News = ({
    date = date.format('MMM, YYYY');
 
    return (
-      <Wrapper>
-         <header>
-            <div className="info">
-               <h5>{title}</h5>
-            </div>
-         </header>
+      <Paper elevation={3} sx={paperStyles}>
+         <Box sx={titleStyles}>
+            <Title>{title}</Title>
+         </Box>
 
-         <div className="content">
+         <ContentCenterWrapper>
             <div
                className="content-center"
                dangerouslySetInnerHTML={{ __html: desc }}
             ></div>
+         </ContentCenterWrapper>
 
-            <footer>
-               <div className="footer-user">
-                  <div className="actions">
-                     {(user._id === createdBy || user.role === 'admin') && (
+         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <Box
+               sx={{
+                  display: 'flex',
+                  justifyContent: 'spaceBetween',
+                  alignItems: 'center',
+               }}
+            >
+               {(user._id === createdBy || user.role === 'admin') && (
+                  <Stack
+                     direction="row"
+                     spacing={2}
+                     justifyContent={{ xs: 'center', sm: 'flex-start' }}
+                     alignItems="flex-end"
+                     sx={{ mt: 2, flexGrow: 1 }}
+                  >
+                     <Box sx={{ width: { xs: '50%', sm: 'min-content' } }}>
                         <Link
                            to="/add-blog"
                            onClick={() => {
-                              handleClose();
                               setEditBlog(_id);
                            }}
-                           className="btn edit-btn"
                         >
-                           editar
+                           <ButtonEdit />
                         </Link>
-                     )}
-                     {(user._id === createdBy || user.role === 'admin') && (
-                        <button
-                           type="button"
-                           className="btn delete-btn"
-                           onClick={() => {
-                              handleClose();
-                              deleteBlog(_id);
-                           }}
-                        >
-                           borrar
-                        </button>
-                     )}
-                  </div>
+                     </Box>
 
-                  <RecipeInfo icon={<FaCalendarAlt />} text={date} />
-               </div>
-
-               {user.role === 'admin' && (
-                  <div className="footer-admin-wrapper">
-                     <button
-                        type="button"
-                        className={`btn btn-edit`}
-                        onClick={() => openModal(_id)}
-                     >
-                        Editar Admin
-                        <span className="edit-success">👍</span>
-                        <BsArrowRightSquareFill />
-                     </button>
-                  </div>
+                     <ButtonDelete
+                        deleteRecipe={() => deleteBlog(_id)}
+                        id={_id}
+                     />
+                  </Stack>
                )}
-            </footer>
-         </div>
-      </Wrapper>
+
+               <Box display={{ xs: 'none', sm: 'inline-block' }}>
+                  <RecipeInfo icon={<FaCalendarAlt />} text={date} />
+               </Box>
+            </Box>
+
+            {user.role === 'admin' && (
+               <BtnEditWrapper>
+                  <button
+                     type="button"
+                     className={`btn btn-edit`}
+                     onClick={() => openModal(_id)}
+                  >
+                     Editar Admin
+                     <span className="edit-success">👍</span>
+                     <BsArrowRightSquareFill />
+                  </button>
+               </BtnEditWrapper>
+            )}
+         </Box>
+      </Paper>
    );
+};
+
+const titleStyles = {
+   padding: '0 1.5rem',
+   borderBottom: '1px solid var(--grey-100)',
+   display: 'grid',
+   alignItems: 'center',
+   // height: '100px',
+};
+
+const paperStyles = {
+   maxWidth: 900,
+   marginTop: '50px',
+   backgroundColor: 'var(--primary-50)',
+   height: 'min-content',
+   mx: { sm: 'auto' }, // xel grid 1 columna en sm
+
+   p: 4,
+
+   border: '12px double var(--primary-700)',
 };
 
 export default News;
 
-const Wrapper = styled.article`
-   /* background: var(--white); */
-   /* border-radius: var(--borderRadius); */
-   /* display: grid; */
-   /* grid-template-rows: 100px auto; */
-   /* box-shadow: var(--shadow-2); */
-
-   .content {
-      padding: 1rem 1.5rem;
-      display: grid;
-      grid-template-rows: 1fr auto;
-   }
+const ContentCenterWrapper = styled.div`
    .content-center {
       border-bottom: 1px solid var(--grey-100);
 
@@ -132,147 +153,12 @@ const Wrapper = styled.article`
       max-width: 100% !important;
       height: auto !important;
    }
+`;
 
-   @media (min-width: 700px) {
-      padding: 1rem;
-      /* max-width: 80vw; */
-   }
-
-   @media (min-width: 992px) {
-      padding: 2rem;
-      /* max-width: 70vw; */
-   }
-   @media (min-width: 1120px) {
-      padding: 1.5rem;
-      /* max-width: 800px; */
-   }
-
-   header {
-      padding: 1rem 1.5rem;
-      border-bottom: 1px solid var(--grey-100);
-      display: grid;
-      align-items: center;
-      height: 100px;
-      h5 {
-         letter-spacing: 0;
-      }
-   }
-
-   .info {
-      h5 {
-         margin-bottom: 0.25rem;
-      }
-   }
-   .ulListProblem {
-      margin: 0 20px;
-      display: flex;
-      justify-content: space-between;
-      text-transform: capitalize;
-
-      li {
-         list-style-type: none;
-         margin-top: 0.5rem;
-         display: flex;
-         align-items: center;
-      }
-   }
-
-   .status {
-      border-radius: var(--borderRadius);
-      text-transform: capitalize;
-      letter-spacing: var(--letterSpacing);
-      text-align: center;
-      width: auto;
-      height: 30px;
-      font-size: 0.8rem;
-
-      margin-left: 0.5rem;
-   }
-
-   .actions {
-      .btn-user {
-         font-size: 0.8rem;
-         font-weight: bold;
-      }
-   }
-
-   footer {
-      margin-top: 1rem;
-      display: flex;
-      flex-direction: column;
-   }
-
-   .footer-user {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-   }
-
-   .footer-admin-wrapper {
-      display: flex;
-      flex-direction: column;
-   }
-   .footer-admin {
-      margin-top: 1rem;
-      border-top: 1px solid var(--grey-100);
-      padding-top: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      @media (max-width: 450px) {
-         display: flex;
-         flex-direction: column;
-         align-items: center;
-         justify-content: center;
-
-         .checkboxcito {
-            width: 120px;
-            margin-top: 1rem;
-         }
-      }
-   }
-
-   .edit-btn,
-   .delete-btn {
-      letter-spacing: var(--letterSpacing);
-      cursor: pointer;
-      height: 30px;
-      font-size: 0.8rem;
-   }
-   .edit-btn {
-      color: var(--green-dark);
-      background: var(--green-light);
-      margin-right: 0.5rem;
-   }
-   .delete-btn {
-      color: var(--red-dark);
-      background: var(--red-light);
-   }
-   &:hover .actions {
-      visibility: visible;
-   }
-
-   .btn-close {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-
-      background-color: var(--red-light);
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0.5rem;
-
-      &:hover {
-         background-color: var(--white);
-         color: var(--red-light);
-         border: 3px solid var(--red-light);
-      }
-   }
-
+const BtnEditWrapper = styled.div`
    .btn-edit {
+      width: 100%;
+
       margin-top: 1rem;
       display: flex;
       gap: 1rem;
@@ -292,53 +178,16 @@ const Wrapper = styled.article`
          right: 20px;
       }
    }
+`;
 
-   /* CHECKBOX */
+const Title = styled.h2`
+   color: var(--primary-700);
+   text-shadow: 1px 0px 1px #cccccc, 0px 1px 1px #eeeeee, 2px 1px 1px #cccccc,
+      1px 2px 1px #eeeeee, 3px 2px 1px #cccccc, 2px 3px 1px #eeeeee,
+      4px 3px 1px #cccccc, 3px 4px 1px #eeeeee, 5px 4px 1px #cccccc,
+      4px 5px 1px #eeeeee, 6px 5px 1px #cccccc, 5px 6px 1px #eeeeee,
+      7px 6px 1px #cccccc;
+   color: var(--primary-700);
 
-   input[type='checkbox'] {
-      display: none;
-   }
-
-   input[type='checkbox'] + label {
-      display: block;
-      position: relative;
-      padding-left: 35px;
-      margin-bottom: 20px;
-      font: 14px/20px 'Open Sans', Arial, sans-serif;
-      color: var(--textColor);
-      cursor: pointer;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-   }
-
-   input[type='checkbox'] + label:last-child {
-      margin-bottom: 0;
-   }
-
-   input[type='checkbox'] + label:before {
-      content: '';
-      display: block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid var(--primary-500);
-      position: absolute;
-      left: 0;
-      top: 0;
-      opacity: 0.6;
-      -webkit-transition: all 0.12s, border-color 0.08s;
-      transition: all 0.12s, border-color 0.08s;
-   }
-
-   input[type='checkbox']:checked + label:before {
-      width: 10px;
-      top: -5px;
-      left: 5px;
-      border-radius: 0;
-      opacity: 1;
-      border-top-color: transparent;
-      border-left-color: transparent;
-      -webkit-transform: rotate(45deg);
-      transform: rotate(45deg);
-   }
+   font-weight: bolder;
 `;

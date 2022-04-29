@@ -12,7 +12,7 @@ const RecipeInfo = ({ icon, text }) => {
 export default RecipeInfo;
 
 const Wrapper = styled.div`
-   /* margin-top: 0.5rem; */
+   margin-top: 0.5rem;
    display: flex;
    align-items: center;
    align-self: end;

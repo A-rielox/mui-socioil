@@ -278,7 +278,7 @@ const reducer = (state, action) => {
    //
    if (action.type === DELETE_RECIPE_BEGIN) {
       // en la fcn llamo a getRecipes() q va a poner isLoading:false
-      return { ...state, isLoading: true };
+      return { ...state, isLoading: true, page: 1 };
    }
 
    //
@@ -367,7 +367,7 @@ const reducer = (state, action) => {
    //
    if (action.type === DELETE_BLOG_BEGIN) {
       // en la fcn llamo a getRecipes() q va a poner isLoading:false
-      return { ...state, isLoading: true };
+      return { ...state, isLoading: true, pageBlogs: 1 };
    }
 
    //

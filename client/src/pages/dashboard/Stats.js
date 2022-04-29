@@ -38,7 +38,7 @@ const Stats = () => {
 
    useEffect(() => {
       getBlogs({ news: true });
-   }, [searchBlog, searchCategory, sort, pageBlogs]);
+   }, [searchBlog, searchCategory, sort, pageBlogs, blogs.length]);
 
    if (isLoading) {
       return <Loading center />;
