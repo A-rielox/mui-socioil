@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from 'react';
 import Loading from '../Loading';
 
 import { FaCalendarAlt } from 'react-icons/fa';
-import { ImCross } from 'react-icons/im';
 import { BsArrowRightSquareFill } from 'react-icons/bs';
 
 import { Link } from 'react-router-dom';
