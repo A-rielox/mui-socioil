@@ -1,4 +1,3 @@
-import { useEffect, useState, useRef } from 'react';
 import Loading from '../Loading';
 
 import { FaCalendarAlt } from 'react-icons/fa';
@@ -11,93 +10,18 @@ import RecipeInfo from '../RecipeInfo';
 import styled from 'styled-components';
 
 const News = ({
-   _id, // <----- MANTENER
-   title, // <----- MANTENER
-   desc, // <----- MANTENER
-   category, // <----- MANTENER
-   createdAt, // <----- MANTENER
-   createdBy, // <----- MANTENER
-   handleClose, // <----- MANTENER
-   // valores para admin,
-   // onHold,
-   // news,
-   // featured,
+   _id,
+   title,
+   desc,
+   createdAt,
+   createdBy,
+   handleClose,
+
    openModal,
 }) => {
-   const { setEditBlog, deleteBlog, user, authFetch } = useAppContext();
-   const [blogUser, setBlogUser] = useState(null);
-   // pal checkbox
-   const [adminValues, setAdminValues] = useState({
-      onHold: false,
-      news: false,
-      featured: false,
-   });
+   const { setEditBlog, deleteBlog, user } = useAppContext();
 
-   // FETCH PARA OBTENER VALORES DE NOMBRE Y RANGO DEL user + blog
-   useEffect(() => {
-      // lightblue obtener NOMBRE Y RANGO DEL user
-      const fetchUser = async () => {
-         const {
-            data: { queryUser },
-         } = await authFetch.get(`/auth/getUser?userId=${createdBy}`);
-
-         setBlogUser(queryUser);
-      };
-
-      // lightblue obtener datos BLOG
-      const fetchBlog = async () => {
-         const {
-            data: { queryBlog },
-         } = await authFetch.get(`/blogs/getBlog?blogId=${_id}`);
-
-         setAdminValues({
-            onHold: queryBlog.onHold,
-            news: queryBlog.news,
-            featured: queryBlog.featured,
-         });
-      };
-
-      fetchUser();
-      fetchBlog();
-   }, [_id]);
-
-   // green ACTUALIZA VALORES ADMIN
-   const switchAdminValues = e => {
-      const name = e.target.name;
-      const checked = e.target.checked;
-
-      setAdminValues({ ...adminValues, [name]: checked });
-   };
-
-   // green ENVIA  VALORES ADMIN A DB
-   const timerRef = useRef(null); // para 👍
-   const submitAdminValues = e => {
-      clearTimeout(timerRef.current);
-
-      // actualizando
-      const updateAdminValues = async () => {
-         await authFetch.patch(`/blogs/admin/${_id}`, {
-            onHold: adminValues.onHold,
-            news: adminValues.news,
-            featured: adminValues.featured,
-         });
-
-         // NO NECESITO ACTUALIZAR LOS DATOS CON LA RESPUESTA XQ MI ESTADO DE LOS CHECKBOX YA REPRESENTA EL VALOR DE LA DB
-      };
-
-      updateAdminValues();
-      // fin actualizando
-
-      // para boton con 👍
-      const guardarBtn = e.target;
-      guardarBtn.firstElementChild.classList.toggle('ready');
-
-      timerRef.current = setTimeout(() => {
-         guardarBtn.firstElementChild.classList.toggle('ready');
-      }, 3000);
-   };
-
-   if (!blogUser) {
+   if (!_id) {
       return <Loading center />;
    }
 
@@ -124,32 +48,30 @@ const News = ({
             <footer>
                <div className="footer-user">
                   <div className="actions">
-                     {user._id === createdBy ||
-                        (user.role === 'admin' && (
-                           <Link
-                              to="/add-blog"
-                              onClick={() => {
-                                 handleClose();
-                                 setEditBlog(_id);
-                              }}
-                              className="btn edit-btn"
-                           >
-                              editar
-                           </Link>
-                        ))}
-                     {user._id === createdBy ||
-                        (user.role === 'admin' && (
-                           <button
-                              type="button"
-                              className="btn delete-btn"
-                              onClick={() => {
-                                 handleClose();
-                                 deleteBlog(_id);
-                              }}
-                           >
-                              borrar
-                           </button>
-                        ))}
+                     {(user._id === createdBy || user.role === 'admin') && (
+                        <Link
+                           to="/add-blog"
+                           onClick={() => {
+                              handleClose();
+                              setEditBlog(_id);
+                           }}
+                           className="btn edit-btn"
+                        >
+                           editar
+                        </Link>
+                     )}
+                     {(user._id === createdBy || user.role === 'admin') && (
+                        <button
+                           type="button"
+                           className="btn delete-btn"
+                           onClick={() => {
+                              handleClose();
+                              deleteBlog(_id);
+                           }}
+                        >
+                           borrar
+                        </button>
+                     )}
                   </div>
 
                   <RecipeInfo icon={<FaCalendarAlt />} text={date} />

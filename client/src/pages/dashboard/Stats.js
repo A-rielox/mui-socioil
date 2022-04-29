@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import New from '../../components/mui/News';
 import NewsModal from '../../components/mui/NewsModal';
 import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 
 const Stats = () => {
    const {
@@ -71,11 +72,19 @@ const Stats = () => {
             tenemos {totalBlogs} noticia{blogs.length > 1 && 's'}
          </h5>
 
-         <div className="recipes">
+         <Box
+            sx={{
+               display: 'grid',
+               gridTemplateColumns: {
+                  sm: '1fr',
+               },
+               gap: 4,
+            }}
+         >
             {blogs.map(blog => {
                return <New key={blog._id} {...blog} openModal={open} />;
             })}
-         </div>
+         </Box>
 
          {numOfBlogPages > 1 && <PageBtnContainerBlogs />}
 
