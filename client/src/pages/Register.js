@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useAppContext } from '../context/appContext';
 
-import { LogoBig, InputSimple, Alert } from '../components';
+import { LogoBig, Alert } from '../components';
 import styled from 'styled-components';
 
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
@@ -15,12 +15,10 @@ import Fondo2 from '../components/Fondo2.js';
 
 // MUI
 import TextField from '@mui/material/TextField';
-
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
 import Button from '@mui/material/Button';
 
 const initialState = {
@@ -84,6 +82,24 @@ function Register() {
 
    const toggleMember = () => {
       setValues({ ...values, isMember: !values.isMember });
+   };
+
+   const buttonEnviarStyles = {
+      padding: '0.5rem 1rem',
+      bgcolor: 'var(--primary-500)',
+      '&:hover': {
+         bgcolor: 'var(--primary-100)',
+         color: 'var(--primary-700)',
+      },
+   };
+
+   const buttonIsMemberStyles = {
+      padding: '0.3rem 0.5rem',
+      color: 'var(--primary-700)',
+      '&:hover': {
+         bgcolor: 'var(--primary-100)',
+         color: 'var(--primary-700)',
+      },
    };
 
    return (
@@ -204,20 +220,21 @@ function Register() {
                            ease: 'easeInOut',
                         }}
                      >
-                        <Button
+                        <button
+                           type="submit"
+                           className="btn btn-block"
+                           disabled={isLoading}
+                        >
+                           enviar
+                        </button>
+                        {/* <Button
                            variant="contained"
                            fullWidth
                            disabled={isLoading}
-                           sx={{
-                              bgcolor: 'var(--primary-500)',
-                              '&:hover': {
-                                 bgcolor: 'var(--primary-100)',
-                                 color: 'var(--primary-700)',
-                              },
-                           }}
+                           sx={buttonEnviarStyles}
                         >
                            enviar
-                        </Button>
+                        </Button> */}
                      </motion.div>
 
                      <p>
@@ -225,13 +242,13 @@ function Register() {
                            ? 'Aún no te unes? '
                            : 'Ya eres miembro?'}
 
-                        <button
-                           type="button"
+                        <Button
+                           variant="text"
+                           sx={buttonIsMemberStyles}
                            onClick={toggleMember}
-                           className="member-btn"
                         >
                            {values.isMember ? 'Registro' : 'Login'}
-                        </button>
+                        </Button>
                      </p>
                   </motion.div>
                </motion.form>
