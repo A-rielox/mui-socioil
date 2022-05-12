@@ -64,14 +64,9 @@ export default function RecipeReviewCard({
    }, [_id]);
 
    //
-   //
-   console.log(desc);
-   // const newDesc = desc.replace(/return/g, '<br>');
-   // console.log(newDesc);
+   // SEPARO LA DESCRIPCION EN PARRAFOS XCADA ENTER
    let newDesc = desc.split('\n');
    newDesc = newDesc.map(singleString => singleString.trim());
-
-   console.log(newDesc);
 
    const [expanded, setExpanded] = useState(false);
 
@@ -173,8 +168,13 @@ export default function RecipeReviewCard({
 
          <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
-               <Typography variant="body1">{newDesc}</Typography>
-               {/* <p>{newDesc}</p> */}
+               {newDesc.map((singleDesc, index) => {
+                  return (
+                     <Typography key={index} paragraph variant="body1">
+                        {singleDesc}
+                     </Typography>
+                  );
+               })}
 
                {(user._id === createdBy || user.role === 'admin') && (
                   <Stack
