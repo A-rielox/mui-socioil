@@ -38,7 +38,6 @@ const AddBlog = () => {
       // Anything in here is fired on component mount.
       return () => {
          // Anything in here is fired on component unmount.
-         console.log('desmontado');
          clearValues();
       };
       // si pongo la dependencia "clearValues" se hace render infinito

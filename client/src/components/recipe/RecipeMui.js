@@ -61,6 +61,12 @@ export default function RecipeReviewCard({
       };
 
       fetchUser();
+
+      return () => {
+         setRecipeUser(null);
+         // ARREGLA
+         // Warning: Can't perform a React state update on an unmounted component.
+      };
    }, [_id]);
 
    //

@@ -37,6 +37,10 @@ const Stats = () => {
 
    useEffect(() => {
       getBlogs({ news: true });
+
+      // return () => {
+      //    console.log('fixing memory leak');
+      // };
    }, [searchBlog, searchCategory, sort, pageBlogs, blogs.length]);
 
    if (isLoading) {

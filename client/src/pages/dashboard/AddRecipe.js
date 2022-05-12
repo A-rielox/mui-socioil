@@ -20,7 +20,6 @@ const AddRecipe = () => {
       // Anything in here is fired on component mount.
       return () => {
          // Anything in here is fired on component unmount.
-         console.log('desmontado');
          clearValues();
       };
    }, []);

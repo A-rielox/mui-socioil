@@ -95,7 +95,7 @@ const DisplayedBlog = ({
 
       timerRef.current = setTimeout(() => {
          guardarBtn.firstElementChild.classList.toggle('ready');
-      }, 3000);
+      }, 4000);
    };
 
    if (!blogUser) {
@@ -194,7 +194,8 @@ const DisplayedBlog = ({
                {user.role === 'admin' && (
                   <div className="footer-admin-wrapper">
                      <div className="footer-admin">
-                        <div className="checkboxcito">
+                        {/* PENDINTE */}
+                        {/* <div className="checkboxcito">
                            <input
                               type="checkbox"
                               id="box-onHold"
@@ -205,7 +206,7 @@ const DisplayedBlog = ({
                               }}
                            />
                            <label htmlFor="box-onHold">En revisión</label>
-                        </div>
+                        </div> */}
 
                         <div className="checkboxcito">
                            <input
@@ -220,7 +221,8 @@ const DisplayedBlog = ({
                            <label htmlFor="box-news">Noticia</label>
                         </div>
 
-                        <div className="checkboxcito">
+                        {/* PENDINTE */}
+                        {/* <div className="checkboxcito">
                            <input
                               type="checkbox"
                               id="box-featured"
@@ -231,7 +233,7 @@ const DisplayedBlog = ({
                               }}
                            />
                            <label htmlFor="box-featured">Destacado</label>
-                        </div>
+                        </div> */}
                      </div>
 
                      <button
@@ -262,21 +264,10 @@ const DisplayedBlog = ({
 export default DisplayedBlog;
 
 const Wrapper = styled.article`
-   /* background: var(--white); */
-   /* border-radius: var(--borderRadius); */
-   /* display: grid; */
-   /* grid-template-rows: 100px auto; */
-   /* box-shadow: var(--shadow-2); */
-
    position: relative; // pal btn close
 
    max-height: 90vh;
-   /* max-width: 95vw; */
    overflow-y: scroll;
-   /*  */
-
-   /* margin-top: 6rem; */
-   /* margin-bottom: 2rem; */
 
    .content {
       padding: 1rem 1.5rem;
@@ -308,16 +299,13 @@ const Wrapper = styled.article`
 
    @media (min-width: 700px) {
       padding: 1rem;
-      /* max-width: 80vw; */
    }
 
    @media (min-width: 992px) {
       padding: 2rem;
-      /* max-width: 70vw; */
    }
    @media (min-width: 1120px) {
       padding: 1.5rem;
-      /* max-width: 800px; */
    }
 
    header {
@@ -433,7 +421,8 @@ const Wrapper = styled.article`
       padding-top: 1rem;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      /* justify-content: space-between; MIENTRAS PONGO LOS OTROS*/
+      justify-content: center;
 
       @media (max-width: 450px) {
          display: flex;

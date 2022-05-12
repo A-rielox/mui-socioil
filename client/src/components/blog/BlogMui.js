@@ -23,11 +23,9 @@ export default function BlogMui({
    createdAt,
    createdBy,
    openModal,
-   /* onHold,
-   styledNews, */
+   /* onHold, */
 }) {
-   const { /* setEditBlog, deleteBlog, */ /* user, */ authFetch } =
-      useAppContext();
+   const { authFetch } = useAppContext();
    const [blogUser, setBlogUser] = useState(null);
 
    useEffect(() => {
@@ -40,6 +38,12 @@ export default function BlogMui({
       };
 
       fetchUser();
+
+      return () => {
+         setBlogUser(null);
+         // ARREGLA
+         // Warning: Can't perform a React state update on an unmounted component.
+      };
    }, [_id]);
 
    if (!blogUser) {
