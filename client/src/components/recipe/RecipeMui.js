@@ -63,6 +63,16 @@ export default function RecipeReviewCard({
       fetchUser();
    }, [_id]);
 
+   //
+   //
+   console.log(desc);
+   // const newDesc = desc.replace(/return/g, '<br>');
+   // console.log(newDesc);
+   let newDesc = desc.split('\n');
+   newDesc = newDesc.map(singleString => singleString.trim());
+
+   console.log(newDesc);
+
    const [expanded, setExpanded] = useState(false);
 
    const handleExpandClick = () => {
@@ -163,8 +173,8 @@ export default function RecipeReviewCard({
 
          <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
-               <Typography variant="body1">{desc}</Typography>
-               {/* <p>{desc}</p> */}
+               <Typography variant="body1">{newDesc}</Typography>
+               {/* <p>{newDesc}</p> */}
 
                {(user._id === createdBy || user.role === 'admin') && (
                   <Stack
