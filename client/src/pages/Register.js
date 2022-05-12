@@ -13,6 +13,16 @@ import {
 } from '../animations';
 import Fondo2 from '../components/Fondo2.js';
 
+// MUI
+import TextField from '@mui/material/TextField';
+
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
+import Button from '@mui/material/Button';
+
 const initialState = {
    name: '',
    email: '',
@@ -26,6 +36,15 @@ function Register() {
 
    const navigate = useNavigate();
    const [values, setValues] = useState(initialState);
+
+   // ----------- show-pass
+   const [showPassword, setShowPassword] = useState(false);
+   const handleClickShowPassword = () => {
+      setShowPassword(!showPassword);
+   };
+   const handleMouseDownPassword = event => {
+      event.preventDefault();
+   };
 
    // global context and useNavigate later
 
@@ -120,12 +139,13 @@ function Register() {
                            exit="out"
                            transition={transition}
                         >
-                           <InputSimple
-                              type="text"
+                           <TextField
+                              label="Nombre"
+                              fullWidth
                               name="name"
                               value={values.name}
-                              changeStateValues={changeStateValues}
-                              labelText="Nombre"
+                              onChange={changeStateValues}
+                              sx={{ mb: 2 }}
                            />
                         </motion.div>
                      )}
@@ -133,21 +153,44 @@ function Register() {
 
                   {/* EMAIL */}
                   <motion.div layout>
-                     <InputSimple
-                        type="email"
+                     <TextField
+                        label="Email"
+                        fullWidth
                         name="email"
                         value={values.email}
-                        changeStateValues={changeStateValues}
+                        onChange={changeStateValues}
+                        sx={{ mb: 2 }}
                      />
                   </motion.div>
 
                   {/* PASSWORD */}
                   <motion.div layout>
-                     <InputSimple
-                        type="password"
+                     <TextField
+                        label="Password"
+                        fullWidth
                         name="password"
                         value={values.password}
-                        changeStateValues={changeStateValues}
+                        onChange={changeStateValues}
+                        sx={{ mb: 2 }}
+                        //
+                        type={showPassword ? 'text' : 'password'}
+                        InputProps={{
+                           endAdornment: (
+                              <InputAdornment position="end">
+                                 <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                 >
+                                    {showPassword ? (
+                                       <VisibilityOff />
+                                    ) : (
+                                       <Visibility />
+                                    )}
+                                 </IconButton>
+                              </InputAdornment>
+                           ),
+                        }}
                      />
                   </motion.div>
 
@@ -161,13 +204,20 @@ function Register() {
                            ease: 'easeInOut',
                         }}
                      >
-                        <button
-                           type="submit"
-                           className="btn btn-block"
+                        <Button
+                           variant="contained"
+                           fullWidth
                            disabled={isLoading}
+                           sx={{
+                              bgcolor: 'var(--primary-500)',
+                              '&:hover': {
+                                 bgcolor: 'var(--primary-100)',
+                                 color: 'var(--primary-700)',
+                              },
+                           }}
                         >
                            enviar
-                        </button>
+                        </Button>
                      </motion.div>
 
                      <p>
@@ -198,6 +248,8 @@ const Wrapper = styled.section`
    align-items: center;
    max-height: 100vh;
 
+   overflow-x: hidden;
+
    background: linear-gradient(
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
@@ -205,7 +257,6 @@ const Wrapper = styled.section`
 
    .form {
       max-width: 400px;
-      /* border-top: 5px solid var(--primary-500); */
 
       background: linear-gradient(
          rgba(255, 255, 255, 0.7),
@@ -219,10 +270,6 @@ const Wrapper = styled.section`
       margin: 0 auto;
       margin-bottom: 1.38rem;
    }
-   /* .form {
-      max-width: 400px;
-      border-top: 5px solid var(--primary-500);
-   } */
 
    h3 {
       text-align: center;
@@ -243,24 +290,7 @@ const Wrapper = styled.section`
       letter-spacing: var(--letterSpacing);
    }
 
-   /* .main-img {
-      display: block;
-      width: 100%;
-      position: absolute;
-      z-index: -1;
-   } */
-
    .main-img {
-      /* display: block;
-      width: 100%;
-      max-height: 100vh;
-      position: absolute;
-      top: 0;
-      left: 0;
-      object-fit: cover;
-      z-index: -1;
-      overflow: hidden; */
-
       width: 100%;
       height: 100%;
       position: absolute;

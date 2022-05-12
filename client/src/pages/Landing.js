@@ -1,7 +1,7 @@
 import { LogoBig } from '../components';
 import { Link } from 'react-router-dom';
 
-import fondo from '../assets/images/fondo2.svg';
+// import fondo from '../assets/images/fondo2.svg';
 import Fondo2 from '../components/Fondo2.js';
 import styled from 'styled-components';
 

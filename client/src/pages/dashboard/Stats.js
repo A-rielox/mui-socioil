@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useAppContext } from '../../context/appContext';
 import Loading from '../../components/Loading';
 import PageBtnContainerBlogs from '../../components/PageBtnContainerBlogs';
-import Blog from '../../components/Blog';
 import styled from 'styled-components';
 
 import New from '../../components/mui/News';
@@ -109,39 +108,39 @@ const NoEncontramos = styled.h2`
    text-transform: none;
 `;
 
-const Wrapper = styled.section`
-   margin-top: 4rem;
+// const Wrapper = styled.section`
+//    margin-top: 4rem;
 
-   h2 {
-      text-transform: none;
-   }
-   & > h5 {
-      font-weight: 700;
-   }
-   .recipes {
-      display: grid;
-      grid-template-columns: 1fr;
-      row-gap: 2rem;
-   }
-   @media (min-width: 992px) {
-      .recipes {
-         display: grid;
-         grid-template-columns: 1fr 1fr;
-         gap: 1rem;
-      }
-   }
+//    h2 {
+//       text-transform: none;
+//    }
+//    & > h5 {
+//       font-weight: 700;
+//    }
+//    .recipes {
+//       display: grid;
+//       grid-template-columns: 1fr;
+//       row-gap: 2rem;
+//    }
+//    @media (min-width: 992px) {
+//       .recipes {
+//          display: grid;
+//          grid-template-columns: 1fr 1fr;
+//          gap: 1rem;
+//       }
+//    }
 
-   .backdrop {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      width: 100%;
-      background: #0000008a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+//    .backdrop {
+//       position: fixed;
+//       top: 0;
+//       left: 0;
+//       height: 100vh;
+//       width: 100%;
+//       background: #0000008a;
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
 
-      z-index: 100;
-   }
-`;
+//       z-index: 100;
+//    }
+// `;
