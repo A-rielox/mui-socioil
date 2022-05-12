@@ -1,4 +1,5 @@
-import { SearchContainer, RecipesContainer } from '../../components';
+import SearchContainer from '../../components/recipe/SearchContainer';
+import RecipesContainer from '../../components/recipe/RecipesContainer';
 
 const AllRecipes = () => {
    return (

@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-
 import { useAppContext } from '../../context/appContext';
 import styled from 'styled-components';
-import { Alert } from '../../components';
+import Alert from '../../components/common/Alert';
 
 // MUI
 
@@ -12,8 +11,8 @@ import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 
-import { ButtonEnviar, ButtonLimpiar } from '../../components/mui/Button';
-import SelectMultiple from '../../components/mui/SelectMultiple';
+import { ButtonEnviar, ButtonLimpiar } from '../../components/buttons/Button';
+import SelectMultiple from '../../components/input/SelectMultiple';
 
 // los valores los pongo en el global ( y no en la pura pag como en el register ) xq para editar y agregar receta voy a ocupar la misma pag ( y la diferencia en la pag la hago con el "isEditing" )
 const AddRecipe = () => {

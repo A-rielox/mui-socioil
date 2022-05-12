@@ -1,5 +1,5 @@
-import { useAppContext } from '../context/appContext';
-import { InputSimple, InputSelect } from '.';
+import { useAppContext } from '../../context/appContext';
+// import { InputSimple, InputSelect } from '..';
 import styled from 'styled-components';
 
 // ---------------- MUI
@@ -9,8 +9,8 @@ import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 
-import SelectSingle from '../components/mui/SelectSingle';
-import { ButtonLimpiar } from '../components/mui/Button';
+import SelectSingle from '../input/SelectSingle';
+import { ButtonLimpiar } from '../buttons/Button';
 
 const SearchContainer = () => {
    const {

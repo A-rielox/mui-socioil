@@ -1,8 +1,8 @@
-import { LogoBig } from '../components';
+import LogoBig from '../components/common/LogoBig';
 import { Link } from 'react-router-dom';
 
 // import fondo from '../assets/images/fondo2.svg';
-import Fondo2 from '../components/Fondo2.js';
+import Fondo2 from '../components/common/Fondo2.js';
 import styled from 'styled-components';
 
 import { motion } from 'framer-motion';

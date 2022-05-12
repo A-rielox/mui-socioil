@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
-import { useAppContext } from '../context/appContext';
-import Loading from './Loading';
-import PageBtnContainerBlogs from './PageBtnContainerBlogs';
+import { useAppContext } from '../../context/appContext';
+import Loading from '../common/Loading';
+import PageBtnContainerBlogs from '../PageBtnContainerBlogs';
 import styled from 'styled-components';
 
 // MUI
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
-import BlogMui from './mui/BlogMui';
+import BlogMui from './BlogMui';
 
-import ModalBlogMui from './mui/ModalBlogMui';
+import ModalBlogMui from './ModalBlogMui';
 
 const BlogsContainer = () => {
    const {

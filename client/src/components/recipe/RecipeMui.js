@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -8,18 +8,16 @@ import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 
-import { useEffect, useState } from 'react';
-import Loading from '../Loading';
+import Loading from '../common/Loading';
 import { useAppContext } from '../../context/appContext';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 
-import headerTitle from './recipe/headerTitle';
-import headerSubtitle from './recipe/headerSubtitle';
+import headerTitle from './headerTitle';
+import headerSubtitle from './headerSubtitle';
 import PrevParagraph from './PrevParagraph';
 
 import {
@@ -27,7 +25,7 @@ import {
    ButtonLevel,
    ButtonEdit,
    ButtonDelete,
-} from './ButtonsUser';
+} from '../buttons/ButtonsUser';
 
 const ExpandMore = styled(props => {
    const { expand, ...other } = props;

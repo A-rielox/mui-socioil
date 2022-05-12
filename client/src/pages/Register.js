@@ -2,7 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useAppContext } from '../context/appContext';
 
-import { LogoBig, Alert } from '../components';
+import LogoBig from '../components/common/LogoBig';
+import Alert from '../components/common/Alert';
 import styled from 'styled-components';
 
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
@@ -11,7 +12,7 @@ import {
    animationInputRegistro,
    transition,
 } from '../animations';
-import Fondo2 from '../components/Fondo2.js';
+import Fondo2 from '../components/common/Fondo2.js';
 
 // MUI
 import TextField from '@mui/material/TextField';
@@ -84,14 +85,14 @@ function Register() {
       setValues({ ...values, isMember: !values.isMember });
    };
 
-   const buttonEnviarStyles = {
-      padding: '0.5rem 1rem',
-      bgcolor: 'var(--primary-500)',
-      '&:hover': {
-         bgcolor: 'var(--primary-100)',
-         color: 'var(--primary-700)',
-      },
-   };
+   // const buttonEnviarStyles = {
+   //    padding: '0.5rem 1rem',
+   //    bgcolor: 'var(--primary-500)',
+   //    '&:hover': {
+   //       bgcolor: 'var(--primary-100)',
+   //       color: 'var(--primary-700)',
+   //    },
+   // };
 
    const buttonIsMemberStyles = {
       padding: '0.3rem 0.5rem',

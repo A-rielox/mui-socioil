@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { useAppContext } from '../../context/appContext';
-import { Alert, Editor } from '../../components';
+import Alert from '../../components/common/Alert';
 import styled from 'styled-components';
+
+import Editor from '../../components/blog/Editor';
 
 // MUI
 import Stack from '@mui/material/Stack';
@@ -9,8 +11,8 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
-import SelectSingle from '../../components/mui/SelectSingle';
-import { ButtonEnviar, ButtonLimpiar } from '../../components/mui/Button';
+import SelectSingle from '../../components/input/SelectSingle';
+import { ButtonEnviar, ButtonLimpiar } from '../../components/buttons/Button';
 
 const AddBlog = () => {
    // para el editor inicialmente ocupaba este

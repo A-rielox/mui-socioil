@@ -1,11 +1,11 @@
-import { useAppContext } from '../context/appContext';
-import Loading from './Loading';
+import { useAppContext } from '../../context/appContext';
+import Loading from '../common/Loading';
 import { useEffect } from 'react';
-import PageBtnContainer from './PageBtnContainer';
+import PageBtnContainer from '../PageBtnContainer';
 import styled from 'styled-components';
 
 // MUI
-import RecipeMui from './mui/RecipeMui';
+import RecipeMui from './RecipeMui';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 

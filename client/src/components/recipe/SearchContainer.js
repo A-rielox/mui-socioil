@@ -1,4 +1,4 @@
-import { useAppContext } from '../context/appContext';
+import { useAppContext } from '../../context/appContext';
 
 // ---------------- MUI
 import Stack from '@mui/material/Stack';
@@ -7,8 +7,8 @@ import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 
-import SelectSingle from '../components/mui/SelectSingle';
-import { ButtonLimpiar } from '../components/mui/Button';
+import SelectSingle from '../input/SelectSingle';
+import { ButtonLimpiar } from '../buttons/Button';
 
 const SearchContainer = () => {
    const {

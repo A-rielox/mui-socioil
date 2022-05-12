@@ -1,4 +1,4 @@
-import Loading from '../Loading';
+import Loading from '../common/Loading';
 
 import { FaCalendarAlt } from 'react-icons/fa';
 import { BsArrowRightSquareFill } from 'react-icons/bs';
@@ -6,7 +6,7 @@ import { BsArrowRightSquareFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../../context/appContext';
 import moment from 'moment';
-import RecipeInfo from '../RecipeInfo';
+import RecipeInfo from '../common/RecipeInfo';
 import styled from 'styled-components';
 
 // MUI
@@ -14,7 +14,7 @@ import styled from 'styled-components';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import { ButtonEdit, ButtonDelete } from './ButtonsUser';
+import { ButtonEdit, ButtonDelete } from '../buttons/ButtonsUser';
 
 const News = ({
    _id,

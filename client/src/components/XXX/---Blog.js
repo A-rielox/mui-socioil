@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import Loading from './Loading';
+import Loading from '../Loading';
 
 import { FaCalendarAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { useAppContext } from '../context/appContext';
+import { useAppContext } from '../../context/appContext';
 import moment from 'moment';
-import RecipeInfo from './RecipeInfo';
+import RecipeInfo from '../RecipeInfo';
 import styled from 'styled-components';
 
 const Blog = ({

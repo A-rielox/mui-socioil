@@ -19,8 +19,8 @@ import Tooltip from '@mui/material/Tooltip';
 import links from '../../utils/links';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useAppContext } from '../../context/appContext';
-import Logo from '../Logo';
-import LogoutBtn from './LogoutBtn';
+import Logo from '../common/Logo';
+import LogoutBtn from '../buttons/LogoutBtn';
 
 const drawerWidth = 200;
 

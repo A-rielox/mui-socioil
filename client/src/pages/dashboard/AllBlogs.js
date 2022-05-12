@@ -1,4 +1,5 @@
-import { SearchBlogsContainer, BlogsContainer } from '../../components';
+import SearchBlogsContainer from '../../components/blog/SearchBlogsContainer';
+import BlogsContainer from '../../components/blog/BlogsContainer';
 
 const AllBlogs = () => {
    return (

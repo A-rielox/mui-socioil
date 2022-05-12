@@ -1,7 +1,6 @@
-import { /* InputSimple, InputSelect, */ Alert } from '../../components';
+import Alert from '../../components/common/Alert';
 import { useState } from 'react';
 import { useAppContext } from '../../context/appContext';
-// import styled from 'styled-components';
 
 // MUI
 
@@ -11,8 +10,8 @@ import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 
-import { ButtonEnviar } from '../../components/mui/Button';
-import SelectSingle from '../../components/mui/SelectSingle';
+import { ButtonEnviar } from '../../components/buttons/Button';
+import SelectSingle from '../../components/input/SelectSingle';
 
 const Profile = () => {
    const { user, showAlert, displayAlert, updateUser, isLoading } =

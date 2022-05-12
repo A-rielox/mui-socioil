@@ -3,8 +3,8 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+// import Button from '@mui/material/Button';
+// import Typography from '@mui/material/Typography';
 
 import ModalBlogMuiContent from './ModalBlogMuiContent';
 
@@ -22,13 +22,13 @@ const style = {
 };
 
 export default function TransitionsModal({
-   _id, // <----- MANTENER
-   title, // <----- MANTENER
-   desc, // <----- MANTENER
-   category, // <----- MANTENER
-   createdAt, // <----- MANTENER
-   createdBy, // <----- MANTENER
-   handleClose, // <----- MANTENER
+   _id,
+   title,
+   desc,
+   category,
+   createdAt,
+   createdBy,
+   handleClose,
    modalOpen,
 }) {
    // const [open, setOpen] = React.useState(modalOpen);

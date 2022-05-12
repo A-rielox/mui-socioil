@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useAppContext } from '../../context/appContext';
-import Loading from '../../components/Loading';
+import Loading from '../../components/common/Loading';
 import PageBtnContainerBlogs from '../../components/PageBtnContainerBlogs';
 import styled from 'styled-components';
 
-import New from '../../components/mui/News';
-import NewsModal from '../../components/mui/NewsModal';
+import New from '../../components/news/News';
+import NewsModal from '../../components/news/NewsModal';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 

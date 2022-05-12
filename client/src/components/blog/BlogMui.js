@@ -1,26 +1,19 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
+
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import IconButton from '@mui/material/IconButton';
-
+import { FaCalendarAlt } from 'react-icons/fa';
 import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
 
-import { useEffect, useState } from 'react';
-import Loading from '../Loading';
+import Loading from '../common/Loading';
+import RecipeInfo from '../common/RecipeInfo';
 import { useAppContext } from '../../context/appContext';
 import moment from 'moment';
+import { ButtonUser, ButtonLevel } from '../buttons/ButtonsUser';
 
 import styled from 'styled-components';
-
-import {
-   ButtonUser,
-   ButtonLevel,
-   ButtonEdit,
-   ButtonDelete,
-} from './ButtonsUser';
 
 export default function BlogMui({
    _id,
@@ -30,10 +23,11 @@ export default function BlogMui({
    createdAt,
    createdBy,
    openModal,
-   onHold,
-   styledNews,
+   /* onHold,
+   styledNews, */
 }) {
-   const { setEditBlog, deleteBlog, user, authFetch } = useAppContext();
+   const { /* setEditBlog, deleteBlog, */ /* user, */ authFetch } =
+      useAppContext();
    const [blogUser, setBlogUser] = useState(null);
 
    useEffect(() => {
@@ -125,16 +119,24 @@ export default function BlogMui({
             <Stack
                direction={{ xs: 'column', sm: 'row' }}
                spacing={2}
-               justifyContent="flex-start"
-               alignItems="flex-end"
+               justifyContent="space-between"
+               alignItems="center"
                sx={{ m: 2, flexGrow: 1 }}
             >
-               <ButtonUser user={blogUser.name} />
+               <Stack
+                  direction={{ xs: 'column', sm: 'row' }}
+                  spacing={2}
+                  sx={{ m: 2, width: { xs: '100%' } }}
+               >
+                  <ButtonUser user={blogUser.name} />
 
-               <ButtonLevel
-                  colorLevel={colorLevel}
-                  levelToDisplay={levelToDisplay}
-               />
+                  <ButtonLevel
+                     colorLevel={colorLevel}
+                     levelToDisplay={levelToDisplay}
+                  />
+               </Stack>
+
+               <RecipeInfo icon={<FaCalendarAlt />} text={date} />
             </Stack>
          </CardActions>
       </Card>

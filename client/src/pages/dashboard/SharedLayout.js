@@ -1,8 +1,8 @@
 import { useAppContext } from '../../context/appContext';
 import { Outlet } from 'react-router-dom';
 
-import SidebarBigMui from '../../components/mui/SidebarBigScreen';
-import SidebarSmallMui from '../../components/mui/SidebarSmallMui';
+import SidebarBigMui from '../../components/nav_side-bar/SidebarBigScreen';
+import SidebarSmallMui from '../../components/nav_side-bar/SidebarSmallMui';
 import Box from '@mui/material/Box';
 
 const SharedLayout = () => {

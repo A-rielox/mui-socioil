@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from 'react';
-import Loading from '../Loading';
 
 import { FaCalendarAlt } from 'react-icons/fa';
 import { ImCross } from 'react-icons/im';
@@ -8,17 +7,18 @@ import { BsArrowRightSquareFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../../context/appContext';
 import moment from 'moment';
-import RecipeInfo from '../RecipeInfo';
+import RecipeInfo from '../common/RecipeInfo';
+import Loading from '../common/Loading';
 import styled from 'styled-components';
 
 const DisplayedBlog = ({
-   _id, // <----- MANTENER
-   title, // <----- MANTENER
-   desc, // <----- MANTENER
-   category, // <----- MANTENER
-   createdAt, // <----- MANTENER
-   createdBy, // <----- MANTENER
-   handleClose, // <----- MANTENER
+   _id,
+   title,
+   desc,
+   category,
+   createdAt,
+   createdBy,
+   handleClose,
    // valores para admin,
    // onHold,
    // news,

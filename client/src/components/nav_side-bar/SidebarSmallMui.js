@@ -7,7 +7,7 @@ import Slide from '@mui/material/Slide';
 import { styled } from '@mui/material/styles';
 import Fab from '@mui/material/Fab';
 import MyFab from './MyFab';
-import LogoutBtn from './LogoutBtn';
+import LogoutBtn from '../buttons/LogoutBtn';
 
 function HideOnScroll(props) {
    const { children, window } = props;
