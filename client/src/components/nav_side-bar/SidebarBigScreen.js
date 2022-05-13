@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -13,7 +14,6 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-
 import Tooltip from '@mui/material/Tooltip';
 
 import links from '../../utils/links';
@@ -109,29 +109,43 @@ export default function MiniDrawer() {
       display: 'flex',
    };
 
+   const sxBoxToolbar = {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      width: '100%',
+   };
+
+   const sxIconButtonToolbar = {
+      color: 'var(--primary-700)',
+      marginRight: 5,
+      ...(showSidebar && { display: 'none' }),
+   };
+
+   const sxListItemButton = {
+      minHeight: 48,
+      justifyContent: showSidebar ? 'initial' : 'center',
+      px: 2.5,
+   };
+
+   const sxListItemIcon = {
+      minWidth: 0,
+      mr: showSidebar ? 3 : 'auto',
+      justifyContent: 'center',
+   };
+
+   const sxListItemText = { opacity: showSidebar ? 1 : 0 };
+
    return (
-      // <Box sx={{ display: 'flex' }}>
       <Box sx={sxSidebar}>
          <AppBar position="fixed" open={showSidebar}>
             <Toolbar sx={{ backgroundColor: 'var(--primary-50)' }}>
-               <Box
-                  sx={{
-                     display: 'flex',
-                     justifyContent: 'space-between',
-                     alignItems: 'center',
-                     width: '100%',
-                  }}
-               >
+               <Box sx={sxBoxToolbar}>
                   <IconButton
-                     // color="inherit"
                      aria-label="open drawer"
                      onClick={handleDrawerOpen}
                      edge="start"
-                     sx={{
-                        color: 'var(--primary-700)',
-                        marginRight: 5,
-                        ...(showSidebar && { display: 'none' }),
-                     }}
+                     sx={sxIconButtonToolbar}
                   >
                      <MenuIcon />
                   </IconButton>
@@ -146,7 +160,6 @@ export default function MiniDrawer() {
             </Toolbar>
          </AppBar>
 
-         {/* sx={{ display: { xs: 'none', sm: 'block' } }} */}
          <Drawer variant="permanent" open={showSidebar}>
             <DrawerHeader>
                <IconButton onClick={handleDrawerClose}>
@@ -164,42 +177,24 @@ export default function MiniDrawer() {
                {links.map(link => {
                   const { id, text, path, icon } = link;
 
+                  const linkClassName = `${
+                     path === location.pathname.substring(1) ||
+                     (path === '/' && location.pathname.substring(1) === '')
+                        ? 'activeLink'
+                        : ''
+                  }`;
+
                   return (
-                     <NavLink
-                        key={id}
-                        to={path}
-                        // className={({ isActive }) =>
-                        //    isActive ? 'nav-link active' : 'nav-link'
-                        // }
-                        // onClick={toggleSidebar}
-                     >
+                     <NavLink key={id} to={path}>
                         <ListItemButton
                            key={text}
-                           sx={{
-                              minHeight: 48,
-                              justifyContent: showSidebar
-                                 ? 'initial'
-                                 : 'center',
-                              px: 2.5,
-                           }}
-                           className={`${
-                              path === location.pathname.substring(1)
-                                 ? 'activeLink'
-                                 : ''
-                           }`}
+                           sx={sxListItemButton}
+                           className={linkClassName}
                         >
                            <Tooltip title={text.toUpperCase()}>
                               <ListItemIcon
-                                 sx={{
-                                    minWidth: 0,
-                                    mr: showSidebar ? 3 : 'auto',
-                                    justifyContent: 'center',
-                                 }}
-                                 className={`${
-                                    path === location.pathname.substring(1)
-                                       ? 'activeLink'
-                                       : ''
-                                 }`}
+                                 sx={sxListItemIcon}
+                                 className={linkClassName}
                               >
                                  {icon}
                               </ListItemIcon>
@@ -207,12 +202,8 @@ export default function MiniDrawer() {
 
                            <ListItemText
                               primary={text}
-                              sx={{ opacity: showSidebar ? 1 : 0 }}
-                              className={`${
-                                 path === location.pathname.substring(1)
-                                    ? 'activeLink'
-                                    : ''
-                              }`}
+                              sx={sxListItemText}
+                              className={linkClassName}
                            />
                         </ListItemButton>
                      </NavLink>
@@ -223,3 +214,12 @@ export default function MiniDrawer() {
       </Box>
    );
 }
+
+/* active class original
+
+path === location.pathname.substring(1)
+   ? 'activeLink'
+   : ''
+
+
+*/

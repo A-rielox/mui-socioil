@@ -23,7 +23,6 @@ const Stats = () => {
       numOfBlogPages,
    } = useAppContext();
 
-   // ♏♏♏♏
    const [modalOpen, setModalOpen] = useState(false);
    const [blogOpened, setBlogOpened] = useState('');
    const close = () => setModalOpen(false);
@@ -37,10 +36,6 @@ const Stats = () => {
 
    useEffect(() => {
       getBlogs({ news: true });
-
-      // return () => {
-      //    console.log('fixing memory leak');
-      // };
    }, [searchBlog, searchCategory, sort, pageBlogs, blogs.length]);
 
    if (isLoading) {
@@ -111,40 +106,3 @@ const NoEncontramos = styled.h2`
    margin-top: 4rem;
    text-transform: none;
 `;
-
-// const Wrapper = styled.section`
-//    margin-top: 4rem;
-
-//    h2 {
-//       text-transform: none;
-//    }
-//    & > h5 {
-//       font-weight: 700;
-//    }
-//    .recipes {
-//       display: grid;
-//       grid-template-columns: 1fr;
-//       row-gap: 2rem;
-//    }
-//    @media (min-width: 992px) {
-//       .recipes {
-//          display: grid;
-//          grid-template-columns: 1fr 1fr;
-//          gap: 1rem;
-//       }
-//    }
-
-//    .backdrop {
-//       position: fixed;
-//       top: 0;
-//       left: 0;
-//       height: 100vh;
-//       width: 100%;
-//       background: #0000008a;
-//       display: flex;
-//       align-items: center;
-//       justify-content: center;
-
-//       z-index: 100;
-//    }
-// `;
