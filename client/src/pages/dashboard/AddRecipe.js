@@ -30,7 +30,6 @@ const AddRecipe = () => {
       displayAlert,
       title,
       desc,
-
       changeStateValues,
       isEditing,
       editRecipe,
@@ -64,7 +63,6 @@ const AddRecipe = () => {
 
    const handleSubmit = e => {
       e.preventDefault();
-      console.log(problemsList);
 
       // prettier-ignore
       if (!title || !desc || oilsList.length === 0 || !problemsList) {
@@ -81,7 +79,7 @@ const AddRecipe = () => {
       createRecipe();
 
       // limpia campos tras crear receta
-      // clearValues(); red MIENTRAS PRUEBO red
+      clearValues();
    };
 
    return (

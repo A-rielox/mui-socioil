@@ -2,56 +2,17 @@ import React, { useReducer, useContext } from 'react';
 import reducer from './reducer';
 import axios from 'axios';
 import { oilsList, categoryList } from '../utils/optionLists';
+// prettier-ignore
 import {
-   DISPLAY_ALERT,
-   CLEAR_ALERT,
-   REGISTER_USER_BEGIN,
-   REGISTER_USER_SUCCESS,
-   REGISTER_USER_ERROR,
-   LOGIN_USER_BEGIN,
-   LOGIN_USER_SUCCESS,
-   LOGIN_USER_ERROR,
-   TOGGLE_SIDEBAR,
-   LOGOUT_USER,
-   UPDATE_USER_BEGIN,
-   UPDATE_USER_SUCCESS,
-   UPDATE_USER_ERROR,
-   HANDLE_CHANGE,
-   CLEAR_VALUES,
-   CREATE_RECIPE_BEGIN,
-   CREATE_RECIPE_SUCCESS,
-   CREATE_RECIPE_ERROR,
-   GET_RECIPES_BEGIN,
-   GET_RECIPES_SUCCESS,
-   SET_EDIT_RECIPE,
-   DELETE_RECIPE_BEGIN,
-   EDIT_RECIPE_BEGIN,
-   EDIT_RECIPE_SUCCESS,
-   EDIT_RECIPE_ERROR,
-   CLEAR_FILTERS,
-   CHANGE_PAGE,
+   DISPLAY_ALERT, CLEAR_ALERT, REGISTER_USER_BEGIN, REGISTER_USER_SUCCESS, REGISTER_USER_ERROR, LOGIN_USER_BEGIN, LOGIN_USER_SUCCESS, LOGIN_USER_ERROR, TOGGLE_SIDEBAR, LOGOUT_USER, UPDATE_USER_BEGIN, UPDATE_USER_SUCCESS, UPDATE_USER_ERROR, HANDLE_CHANGE, CLEAR_VALUES, CREATE_RECIPE_BEGIN, CREATE_RECIPE_SUCCESS, CREATE_RECIPE_ERROR, GET_RECIPES_BEGIN, GET_RECIPES_SUCCESS, SET_EDIT_RECIPE, DELETE_RECIPE_BEGIN, EDIT_RECIPE_BEGIN, EDIT_RECIPE_SUCCESS, EDIT_RECIPE_ERROR, CLEAR_FILTERS, CHANGE_PAGE,
    // ===== BLOG
-   CREATE_BLOG_BEGIN,
-   CREATE_BLOG_SUCCESS,
-   CREATE_BLOG_ERROR,
-   GET_BLOGS_BEGIN,
-   GET_BLOGS_SUCCESS,
-   DELETE_BLOG_BEGIN,
-   SET_EDIT_BLOG,
-   EDIT_BLOG_BEGIN,
-   EDIT_BLOG_SUCCESS,
-   EDIT_BLOG_ERROR,
-   CHANGE_BLOGS_PAGE,
+   CREATE_BLOG_BEGIN, CREATE_BLOG_SUCCESS, CREATE_BLOG_ERROR, GET_BLOGS_BEGIN, GET_BLOGS_SUCCESS, DELETE_BLOG_BEGIN, SET_EDIT_BLOG, EDIT_BLOG_BEGIN, EDIT_BLOG_SUCCESS, EDIT_BLOG_ERROR, CHANGE_BLOGS_PAGE,
 } from './actions';
 
 const token = localStorage.getItem('token');
 const user = localStorage.getItem('user');
 const userLocation = localStorage.getItem('location');
-/* 
 
-previo sidebar
-
-*/
 export const initialState = {
    isLoading: false,
    showAlert: false,
@@ -74,21 +35,21 @@ export const initialState = {
    oilsList: [],
    problemsList: [],
    molestias: '',
-   oil1: '',
-   oil2: '',
-   oil3: '',
-   oil4: '',
-   oil5: '',
-   problem1: '',
-   problem2: '',
-   problem3: '',
+   // oil1: '',
+   // oil2: '',
+   // oil3: '',
+   // oil4: '',
+   // oil5: '',
+   // problem1: '',
+   // problem2: '',
+   // problem3: '',
    // todas las recetas
    totalRecipes: 0,
    numOfPages: 1,
    recipes: [],
    page: 1,
    // para busqueda y sort
-   list4Problems: [],
+   // list4Problems: [],
    search: '',
    searchOil: 'todos',
    searchProblem: 'todos',
@@ -108,13 +69,7 @@ export const initialState = {
    // para busqueda y sort
    searchBlog: '',
    searchCategory: 'todas',
-   // sort: 'recientes',  es =
-   // sortOptions: ['recientes', 'viejos', 'a-z', 'z-a'], es =
 };
-
-// search (en title) - searchOil  - searchProblem - sort
-// poner default en searchOil y searchProblem
-// necesito la lista de posibles oils ( q ya la tengo ) y la de los distintos problems ( q la voy a poner en list4Problems )
 
 const AppContext = React.createContext();
 
@@ -295,7 +250,7 @@ const AppProvider = ({ children }) => {
          });
 
          dispatch({ type: CREATE_RECIPE_SUCCESS });
-         // dispatch({ type: CLEAR_VALUES });  red MIENTRAS PRUEBO red
+         dispatch({ type: CLEAR_VALUES });
       } catch (error) {
          if (error.response.status === 401) return;
 
@@ -307,8 +262,6 @@ const AppProvider = ({ children }) => {
       clearAlert();
    };
 
-   // aqui creo list4Problems en el reducer en GET_RECIPES_SUCCESS
-   // list4Problems: [],
    const getRecipes = async () => {
       const { search, searchOil, searchProblem, sort, page } = state;
       let url = `/recipes?page=${page}&oilsList=${searchOil}&problemsList=${searchProblem}&sort=${sort}`;
@@ -330,31 +283,21 @@ const AppProvider = ({ children }) => {
          });
       } catch (error) {
          console.log(error.response);
-         // logoutUser();  red MIENTRAS PRUEBO red
+         logoutUser();
       }
       clearAlert();
    };
 
    const setEditRecipe = id => {
       dispatch({ type: SET_EDIT_RECIPE, payload: { id } });
-
-      console.log(`editar receta con id: ${id}`);
    };
 
    const editRecipe = async () => {
       dispatch({ type: EDIT_RECIPE_BEGIN });
 
       try {
-         // prettier-ignore
-         // const {
-         //    title, desc, oil1, oil2, oil3, oil4, oil5, problem1, problem2, problem3
-         // } = state;
          const { title, desc, problemsList, oilsList } = state;
 
-         // prettier-ignore
-         // await authFetch.patch(`/recipes/${state.editRecipeId}`, {
-         //    oilsList, problemsList, title, desc, oil1, oil2, oil3, oil4, oil5, problem1, problem2, problem3,
-         // });
          await authFetch.patch(`/recipes/${state.editRecipeId}`, {
             oilsList,
             problemsList,
@@ -382,7 +325,7 @@ const AppProvider = ({ children }) => {
          await authFetch.delete(`/recipes/${recipeId}`);
          getRecipes(); // este va a poner isLoadin: false
       } catch (error) {
-         // logoutUser(); red MIENTRAS PRUEBO red
+         logoutUser();
       }
    };
 
@@ -412,7 +355,7 @@ const AppProvider = ({ children }) => {
          });
 
          dispatch({ type: CREATE_BLOG_SUCCESS });
-         // dispatch({ type: CLEAR_VALUES });  red MIENTRAS PRUEBO red
+         dispatch({ type: CLEAR_VALUES });
       } catch (error) {
          if (error.response.status === 401) return;
 
@@ -435,7 +378,6 @@ const AppProvider = ({ children }) => {
          url = url + `&search=${searchBlog}`;
       }
 
-      // 📰📰📰
       if (typeof news === 'boolean') {
          url = url + `&news=${news}`;
       }
@@ -452,7 +394,7 @@ const AppProvider = ({ children }) => {
          });
       } catch (error) {
          console.log(error.response);
-         // logoutUser();  red MIENTRAS PRUEBO red
+         logoutUser();
       }
       clearAlert();
    };
@@ -493,7 +435,7 @@ const AppProvider = ({ children }) => {
          await authFetch.delete(`/blogs/${blogId}`);
          getBlogs({ news: false }); // este va a poner isLoadin: false
       } catch (error) {
-         // logoutUser(); red MIENTRAS PRUEBO red
+         logoutUser();
       }
    };
 

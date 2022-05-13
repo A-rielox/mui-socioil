@@ -1,44 +1,9 @@
 import { initialState } from './appContext';
+// prettier-ignore
 import {
-   DISPLAY_ALERT,
-   CLEAR_ALERT,
-   REGISTER_USER_BEGIN,
-   REGISTER_USER_SUCCESS,
-   REGISTER_USER_ERROR,
-   LOGIN_USER_BEGIN,
-   LOGIN_USER_SUCCESS,
-   LOGIN_USER_ERROR,
-   TOGGLE_SIDEBAR,
-   LOGOUT_USER,
-   UPDATE_USER_BEGIN,
-   UPDATE_USER_SUCCESS,
-   UPDATE_USER_ERROR,
-   HANDLE_CHANGE,
-   CLEAR_VALUES,
-   CREATE_RECIPE_BEGIN,
-   CREATE_RECIPE_SUCCESS,
-   CREATE_RECIPE_ERROR,
-   GET_RECIPES_BEGIN,
-   GET_RECIPES_SUCCESS,
-   SET_EDIT_RECIPE,
-   DELETE_RECIPE_BEGIN,
-   EDIT_RECIPE_BEGIN,
-   EDIT_RECIPE_SUCCESS,
-   EDIT_RECIPE_ERROR,
-   CLEAR_FILTERS,
-   CHANGE_PAGE,
+   DISPLAY_ALERT, CLEAR_ALERT, REGISTER_USER_BEGIN, REGISTER_USER_SUCCESS, REGISTER_USER_ERROR, LOGIN_USER_BEGIN, LOGIN_USER_SUCCESS, LOGIN_USER_ERROR, TOGGLE_SIDEBAR, LOGOUT_USER, UPDATE_USER_BEGIN, UPDATE_USER_SUCCESS, UPDATE_USER_ERROR, HANDLE_CHANGE, CLEAR_VALUES, CREATE_RECIPE_BEGIN, CREATE_RECIPE_SUCCESS, CREATE_RECIPE_ERROR, GET_RECIPES_BEGIN, GET_RECIPES_SUCCESS, SET_EDIT_RECIPE, DELETE_RECIPE_BEGIN, EDIT_RECIPE_BEGIN, EDIT_RECIPE_SUCCESS, EDIT_RECIPE_ERROR, CLEAR_FILTERS, CHANGE_PAGE,
    // ===== BLOG
-   CREATE_BLOG_BEGIN,
-   CREATE_BLOG_SUCCESS,
-   CREATE_BLOG_ERROR,
-   GET_BLOGS_BEGIN,
-   GET_BLOGS_SUCCESS,
-   DELETE_BLOG_BEGIN,
-   SET_EDIT_BLOG,
-   EDIT_BLOG_BEGIN,
-   EDIT_BLOG_SUCCESS,
-   EDIT_BLOG_ERROR,
-   CHANGE_BLOGS_PAGE,
+   CREATE_BLOG_BEGIN, CREATE_BLOG_SUCCESS, CREATE_BLOG_ERROR, GET_BLOGS_BEGIN, GET_BLOGS_SUCCESS, DELETE_BLOG_BEGIN, SET_EDIT_BLOG, EDIT_BLOG_BEGIN, EDIT_BLOG_SUCCESS, EDIT_BLOG_ERROR, CHANGE_BLOGS_PAGE,
 } from './actions';
 
 const reducer = (state, action) => {
@@ -195,14 +160,14 @@ const reducer = (state, action) => {
          oilsList: [],
          problemsList: [],
          molestias: '',
-         oil1: '',
-         oil2: '',
-         oil3: '',
-         oil4: '',
-         oil5: '',
-         problem1: '',
-         problem2: '',
-         problem3: '',
+         // oil1: '',
+         // oil2: '',
+         // oil3: '',
+         // oil4: '',
+         // oil5: '',
+         // problem1: '',
+         // problem2: '',
+         // problem3: '',
          // ========= BLOG
          isEditingBlog: false,
          editBlogId: '',
@@ -245,9 +210,9 @@ const reducer = (state, action) => {
       const { totalRecipes, numOfPages, recipes } = action.payload;
 
       // red red quitar list4Problems red red
-      let tempRecipes = [...recipes];
-      let list4Problems = tempRecipes.map(recipe => recipe.problemsList);
-      list4Problems = [...new Set(list4Problems.flat())];
+      // let tempRecipes = [...recipes];
+      // let list4Problems = tempRecipes.map(recipe => recipe.problemsList);
+      // list4Problems = [...new Set(list4Problems.flat())];
 
       return {
          ...state,
@@ -255,7 +220,7 @@ const reducer = (state, action) => {
          recipes,
          totalRecipes,
          numOfPages,
-         list4Problems,
+         // list4Problems,
       };
    }
 
@@ -267,13 +232,13 @@ const reducer = (state, action) => {
 
       // prettier-ignore
       const {
-         _id,title,desc,oilsList,oil1,oil2,oil3,oil4,oil5,problemsList,problem1,problem2,problem3,
+         _id,title,desc,oilsList,/* oil1,oil2,oil3,oil4,oil5, */problemsList,/* problem1,problem2,problem3, */
       } = recipe;
 
       const editingMolestias = problemsList.join(', ');
 
       // prettier-ignore
-      return { ...state, isEditing: true, editRecipeId: _id, title, desc, oilsList,  oil1, oil2, oil3, oil4, oil5, problemsList, problem1, problem2, problem3, molestias: editingMolestias };
+      return { ...state, isEditing: true, editRecipeId: _id, title, desc, oilsList,  /* oil1, oil2, oil3, oil4, oil5, */ problemsList, /* problem1, problem2, problem3, */ molestias: editingMolestias };
    }
    //
    if (action.type === DELETE_RECIPE_BEGIN) {
