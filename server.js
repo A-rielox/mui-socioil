@@ -16,21 +16,28 @@ import blogsRouter from './routes/blogsRoutes.js';
 const app = express();
 dotenv.config();
 
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
 // ▦▦▦▦▦▦▦▦▦▦ MIDDLEWARE ▦▦▦▦▦▦▦▦▦▦
 // se va a cambiar a production en heroku
 if (process.env.NODE_ENV !== 'production') {
    app.use(morgan('dev'));
 }
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+app.use(express.static(path.resolve(__dirname, './client/build')));
+
 app.use(express.json()); // acceso a json de req.body
-
-// app.get('/', (req, res) => {
-//    res.send('<h1>HOLI HOLA</h1>');
-// });
-
 //===== ROUTES
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/recipes', authenticateUser, recipesRouter);
 app.use('/api/v1/blogs', authenticateUser, blogsRouter);
+
+app.get('*', function (request, response) {
+   response.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
+});
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

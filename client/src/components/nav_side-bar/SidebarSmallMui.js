@@ -4,8 +4,6 @@ import Toolbar from '@mui/material/Toolbar';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Slide from '@mui/material/Slide';
 
-import { styled } from '@mui/material/styles';
-import Fab from '@mui/material/Fab';
 import MyFab from './MyFab';
 import LogoutBtn from '../buttons/LogoutBtn';
 
@@ -24,16 +22,6 @@ function HideOnScroll(props) {
       </Slide>
    );
 }
-
-const StyledFab = styled(Fab)({
-   position: 'absolute',
-   zIndex: 10000,
-   top: 0,
-   left: 0,
-   backgroundColor: 'var(--primary-50)',
-   color: 'var(--primary-500)',
-   boxShadow: 'none',
-});
 
 export default function SidebarSmallMui(props) {
    return (

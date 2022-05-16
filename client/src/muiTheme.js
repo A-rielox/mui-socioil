@@ -6,19 +6,6 @@ export const dashboardTheme = createTheme({
          styleOverrides: {
             root: {
                padding: '1rem 1.25rem',
-               // '&.MuiButton-contained': {
-               //    backgroundColor: 'purple',
-               //    '&:hover': {
-               //       backgroundColor: 'red',
-               //    },
-               // },
-               // '&.MuiButton-outlined': {
-               //    color: '#fff',
-               //    borderColor: 'rgba(255, 255, 255, 0.7)',
-               //    '&:hover': {
-               //       backgroundColor: 'rgba(0, 0, 0, 0.04)',
-               //    },
-               // },
             },
          },
       },

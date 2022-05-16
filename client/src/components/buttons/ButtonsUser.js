@@ -1,11 +1,5 @@
 import Button from '@mui/material/Button';
 
-import SendIcon from '@mui/icons-material/Send';
-import PersonIcon from '@mui/icons-material/Person';
-
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-
 export const ButtonUser = ({ user }) => {
    return (
       <Button

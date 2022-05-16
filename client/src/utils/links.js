@@ -1,5 +1,4 @@
 import { HiOutlineClipboardList } from 'react-icons/hi';
-import { IoBarChartSharp } from 'react-icons/io5';
 import { GiHealthPotion } from 'react-icons/gi';
 import { GiPotionBall, GiBookmark } from 'react-icons/gi';
 import { BiEditAlt } from 'react-icons/bi';
