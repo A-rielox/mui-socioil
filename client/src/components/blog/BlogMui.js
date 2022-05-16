@@ -91,11 +91,12 @@ export default function BlogMui({
          color: 'var(--grey-100)',
       },
    };
-
+   //sm,  eighthundred, md
    return (
       <Card
          sx={{
             maxWidth: 900,
+            width: '100%',
             overflow: 'visible',
             marginTop: '50px',
             backgroundColor: 'var(--primary-50)',

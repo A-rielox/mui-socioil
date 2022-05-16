@@ -75,6 +75,7 @@ const BlogsContainer = () => {
          </h5>
 
          <Box
+            className="BLOGS CONTAINER"
             sx={{
                display: 'grid',
                gridTemplateColumns: {
@@ -91,13 +92,13 @@ const BlogsContainer = () => {
          {numOfBlogPages > 1 && <PageBtnContainerBlogs />}
 
          {modalOpen && blogOpened && (
-            <>
-               <ModalBlogMui
-                  {...blogOpened}
-                  modalOpen={modalOpen}
-                  handleClose={close}
-               />
-            </>
+            // <>
+            <ModalBlogMui
+               {...blogOpened}
+               modalOpen={modalOpen}
+               handleClose={close}
+            />
+            // </>
          )}
       </Container>
    );

@@ -21,7 +21,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 
 import helmet from 'helmet';
-import xss from 'xss-clean';
+// import xss from 'xss-clean'; // red red red PRUEBA P BLOG
 import mongoSanitize from 'express-mongo-sanitize';
 
 // ▦▦▦▦▦▦▦▦▦▦ MIDDLEWARE ▦▦▦▦▦▦▦▦▦▦
@@ -36,7 +36,7 @@ app.use(express.static(path.resolve(__dirname, './client/build')));
 app.use(express.json()); // acceso a json de req.body
 
 app.use(helmet());
-app.use(xss());
+// app.use(xss()); // red red red PRUEBA P BLOG
 app.use(mongoSanitize());
 
 //===== ROUTES
