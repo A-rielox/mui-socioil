@@ -20,6 +20,10 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import path from 'path';
 
+import helmet from 'helmet';
+import xss from 'xss-clean';
+import mongoSanitize from 'express-mongo-sanitize';
+
 // ▦▦▦▦▦▦▦▦▦▦ MIDDLEWARE ▦▦▦▦▦▦▦▦▦▦
 // se va a cambiar a production en heroku
 if (process.env.NODE_ENV !== 'production') {
@@ -30,6 +34,11 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 app.use(express.static(path.resolve(__dirname, './client/build')));
 
 app.use(express.json()); // acceso a json de req.body
+
+app.use(helmet());
+app.use(xss());
+app.use(mongoSanitize());
+
 //===== ROUTES
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/recipes', authenticateUser, recipesRouter);
