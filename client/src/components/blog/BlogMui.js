@@ -150,13 +150,14 @@ export default function BlogMui({
 
 const ContentWrapper = styled.div`
    padding: 2rem;
+
    .content-center {
       max-height: 700px;
       overflow: hidden;
 
       p {
          margin-bottom: 0.5rem;
-         max-width: 40em;
+         /* max-width: 40em; */
          color: #6e7785;
 
          img {
