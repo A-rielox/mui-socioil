@@ -157,6 +157,7 @@ const ContentWrapper = styled.div`
 
       p {
          margin-bottom: 0.5rem;
+         // comentado
          /* max-width: 40em; */
          color: #6e7785;
 
