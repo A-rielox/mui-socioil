@@ -35,7 +35,15 @@ app.use(express.static(path.resolve(__dirname, './client/build')));
 
 app.use(express.json()); // acceso a json de req.body
 
-app.use(helmet());
+// app.use(helmet());
+app.use(
+   helmet.contentSecurityPolicy({
+      useDefaults: true,
+      directives: {
+         'img-src': ["'self'", 'https: data:'],
+      },
+   })
+); // red red red PRUEBA P BLOG
 // app.use(xss()); // red red red PRUEBA P BLOG
 app.use(mongoSanitize());
 

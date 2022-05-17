@@ -158,6 +158,7 @@ const ContentWrapper = styled.div`
       p {
          margin-bottom: 0.5rem;
          /* max-width: 40em; */
+         /* width: 100%; */
          color: #6e7785;
 
          img {
