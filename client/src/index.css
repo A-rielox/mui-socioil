@@ -86,7 +86,7 @@ body {
 
 p {
    margin-bottom: 1.5rem;
-   max-width: 40em;
+   /* max-width: 40em; */
    color: #6e7785;
 }
 
