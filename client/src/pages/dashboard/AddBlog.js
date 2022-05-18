@@ -164,7 +164,7 @@ const Wrapper = styled.section`
 
       p {
          margin-bottom: 0.5rem;
-         max-width: 40em;
+
          color: #6e7785;
       }
 
