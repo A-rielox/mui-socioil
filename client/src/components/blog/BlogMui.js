@@ -160,8 +160,12 @@ const ContentWrapper = styled.div`
          color: #6e7785;
 
          img {
-            width: 100%;
+            width: 75%;
             height: auto;
+
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
          }
       }
 
