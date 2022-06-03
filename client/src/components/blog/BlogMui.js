@@ -44,6 +44,7 @@ export default function BlogMui({
          // ARREGLA
          // Warning: Can't perform a React state update on an unmounted component.
       };
+      // eslint-disable-next-line
    }, [_id]);
 
    if (!blogUser) {
