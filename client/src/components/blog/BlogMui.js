@@ -102,6 +102,7 @@ export default function BlogMui({
             backgroundColor: 'var(--primary-50)',
             height: 'min-content',
             mx: { sm: 'auto' }, // xel grid 1 columna en sm
+            cursor: 'pointer',
          }}
          onClick={() => openModal(_id)}
       >
